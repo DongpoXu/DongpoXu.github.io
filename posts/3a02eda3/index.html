@@ -172,7 +172,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+        <p class="site-subtitle"><span id="description"></span></p>
       
   </div>
 
@@ -479,6 +479,15 @@
 <p>我想画一幅画，缩影我的一天。<br>早上朦胧中睁开眼睛，我的画开始了，洗脸刷牙，喝一杯温热水，锻炼八分钟，画出了完美的第一笔。绷紧神经，一笔一笔地画下去。<br>接下来呢～滑着滑板抵达实验室，打开电脑，放首音乐，计划着今天要做的事情。<br>然后起来转一转，理一理思路，坐好开始工作～工作过程中不要忘记喝水哦～ 对了，如果可以，请关掉qq微信，必要的联系是要有的，真的要找你的人，一定会找到你。<br>工作闲暇之余，写一写博客，看一看书，做些让自己心情平静的事情。<br>按时吃饭就不必说啦，好的饮食习惯会让我更得心应手的驾驭生活。<br>下午抽出1个小时健身。健完身顺路买第二天的早餐～<br>晚上带着疲惫回到住处，不要懈怠，耐心的对待这幅画的尾巴，接点热水，清洗衣物，泡个脚丫，用牙线认真清洁牙齿。然后刷牙洗脸，如果可以再做一下护肤，靠在床上读书半小时。带着对美好生活的向往，放下书，闭上眼。<br>就这样，晚安～</p>
 
       
+      <div>
+        
+          <div>
+  
+    <div style="text-align:center;color: #555;font-size:18px;">End~~ <i class="fa fa-paw"></i> 撒花ฅ>ω<*ฅ花撒</div>
+  
+</div>
+        
+      </div>
     </div>
     
     
@@ -1197,14 +1206,16 @@
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 
+<script type="text/javascript" src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+
 <script>
-var options = {
-    strings: ['123412551', ' 1234155266'],
-    typeSpeed: 120, //打印的速度。数值越大，速度越慢
-    loop: true, //开启循环
-    loopCount: Infinity, //设置循环次数，值为：Infinity，也可以使用数值
-    backSpeed: 20, //延迟时间后才后退，值越大，延迟的时间就越长
-    cursorChar: '^' //光标的符号，比如：
-};
-var typed = new Typed('#description', options);
+  var options = {
+      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华。不见子都，乃见狂且', '树深时见鹿，溪午不闻钟', '每一个不曾起舞的日子，都是对生命的辜负'],
+      typeSpeed: 200, //打印的速度。数值越大，速度越慢
+      loop: true, //开启循环
+      loopCount: Infinity, //设置循环次数
+      backSpeed: 50, //延迟时间后才后退，值越大，延迟的时间就越长
+      cursorChar: '^ω^' //光标的符号
+  };
+  var typed = new Typed('#description', options);
 </script>

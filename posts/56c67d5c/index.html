@@ -180,7 +180,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+        <p class="site-subtitle"><span id="description"></span></p>
       
   </div>
 
@@ -578,6 +578,15 @@
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.imooc.com/learn/18" target="_blank" rel="noopener">慕课网焦点轮播图</a><br><a href="https://www.cnblogs.com/daisygogogo/p/9499079.html" target="_blank" rel="noopener">封装一个简单的原生 js 焦点轮播图插件</a></p>
 
       
+      <div>
+        
+          <div>
+  
+    <div style="text-align:center;color: #555;font-size:18px;">End~~ <i class="fa fa-paw"></i> 撒花ฅ>ω<*ฅ花撒</div>
+  
+</div>
+        
+      </div>
     </div>
     
     
@@ -1323,14 +1332,16 @@
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 
+<script type="text/javascript" src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+
 <script>
-var options = {
-    strings: ['123412551', ' 1234155266'],
-    typeSpeed: 120, //打印的速度。数值越大，速度越慢
-    loop: true, //开启循环
-    loopCount: Infinity, //设置循环次数，值为：Infinity，也可以使用数值
-    backSpeed: 20, //延迟时间后才后退，值越大，延迟的时间就越长
-    cursorChar: '^' //光标的符号，比如：
-};
-var typed = new Typed('#description', options);
+  var options = {
+      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华。不见子都，乃见狂且', '树深时见鹿，溪午不闻钟', '每一个不曾起舞的日子，都是对生命的辜负'],
+      typeSpeed: 200, //打印的速度。数值越大，速度越慢
+      loop: true, //开启循环
+      loopCount: Infinity, //设置循环次数
+      backSpeed: 50, //延迟时间后才后退，值越大，延迟的时间就越长
+      cursorChar: '^ω^' //光标的符号
+  };
+  var typed = new Typed('#description', options);
 </script>

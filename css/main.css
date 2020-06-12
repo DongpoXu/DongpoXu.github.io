@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff96ff;
+  background: #d1ffd5;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2719,7 +2719,7 @@ code {
 }
 header.header {
   background: #f0e2db;
-  background-image: linear-gradient(90deg, #fb3 11px, transparent 0), linear-gradient(90deg, #ab3 23px, transparent 0), linear-gradient(90deg, #6df 41px, transparent 0);
+  background-image: linear-gradient(90deg, #d29f38 11px, transparent 0), linear-gradient(90deg, #8d9a34 23px, transparent 0), linear-gradient(90deg, #55a1b7 41px, transparent 0);
   background-size: 41px 100%, 61px 100%, 83px 100%;
 }
 .site-meta {
@@ -2741,9 +2741,9 @@ header.header {
   line-height: 50px;
 }
 .site-subtitle {
-  margin-top: 20px;
+  margin-top: 30px;
   color: #121212;
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 .logo-line-before,

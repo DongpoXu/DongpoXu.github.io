@@ -172,7 +172,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+        <p class="site-subtitle"><span id="description"></span></p>
       
   </div>
 
@@ -478,6 +478,15 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr, left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = arr.length,</span><br><span class="line">    partitionIndex,</span><br><span class="line">    left = <span class="keyword">typeof</span> left != <span class="string">"number"</span> ? <span class="number">0</span> : left,</span><br><span class="line">    right = <span class="keyword">typeof</span> right != <span class="string">"number"</span> ? len - <span class="number">1</span> : right;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = arr[right],</span><br><span class="line">      i = left - <span class="number">1</span>,</span><br><span class="line">      temp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = left; j &lt;= right; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt;= x) &#123;</span><br><span class="line">        i++;</span><br><span class="line">        temp = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = temp;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    quickSort(arr, left, i - <span class="number">1</span>);</span><br><span class="line">    quickSort(arr, i + <span class="number">1</span>, right);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
+      <div>
+        
+          <div>
+  
+    <div style="text-align:center;color: #555;font-size:18px;">End~~ <i class="fa fa-paw"></i> 撒花ฅ>ω<*ฅ花撒</div>
+  
+</div>
+        
+      </div>
     </div>
     
     
@@ -1196,14 +1205,16 @@
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 
+<script type="text/javascript" src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+
 <script>
-var options = {
-    strings: ['123412551', ' 1234155266'],
-    typeSpeed: 120, //打印的速度。数值越大，速度越慢
-    loop: true, //开启循环
-    loopCount: Infinity, //设置循环次数，值为：Infinity，也可以使用数值
-    backSpeed: 20, //延迟时间后才后退，值越大，延迟的时间就越长
-    cursorChar: '^' //光标的符号，比如：
-};
-var typed = new Typed('#description', options);
+  var options = {
+      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华。不见子都，乃见狂且', '树深时见鹿，溪午不闻钟', '每一个不曾起舞的日子，都是对生命的辜负'],
+      typeSpeed: 200, //打印的速度。数值越大，速度越慢
+      loop: true, //开启循环
+      loopCount: Infinity, //设置循环次数
+      backSpeed: 50, //延迟时间后才后退，值越大，延迟的时间就越长
+      cursorChar: '^ω^' //光标的符号
+  };
+  var typed = new Typed('#description', options);
 </script>

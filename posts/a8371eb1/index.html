@@ -173,7 +173,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+        <p class="site-subtitle"><span id="description"></span></p>
       
   </div>
 
@@ -563,6 +563,15 @@
 <p>当然，发布-订阅模式也不是完全没有缺点。创建订阅者本身要消耗一定的时间和内存，而且你订阅一个消息后，也许此消息最后都未发生，但这个订阅者会始终存在于内存中。另外，发布-订阅模式虽然可以弱化对象之间的联系，但如果过度使用的话，对象和对象之间的必要联系也将被深埋在背后，会导致程序难以跟踪维护和理解。特别是有多个发布者和订阅者嵌套到一起的时候，要跟踪一个 BUG 不是一件轻松的事情。</p>
 
       
+      <div>
+        
+          <div>
+  
+    <div style="text-align:center;color: #555;font-size:18px;">End~~ <i class="fa fa-paw"></i> 撒花ฅ>ω<*ฅ花撒</div>
+  
+</div>
+        
+      </div>
     </div>
     
     
@@ -1308,14 +1317,16 @@
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 
+<script type="text/javascript" src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+
 <script>
-var options = {
-    strings: ['123412551', ' 1234155266'],
-    typeSpeed: 120, //打印的速度。数值越大，速度越慢
-    loop: true, //开启循环
-    loopCount: Infinity, //设置循环次数，值为：Infinity，也可以使用数值
-    backSpeed: 20, //延迟时间后才后退，值越大，延迟的时间就越长
-    cursorChar: '^' //光标的符号，比如：
-};
-var typed = new Typed('#description', options);
+  var options = {
+      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华。不见子都，乃见狂且', '树深时见鹿，溪午不闻钟', '每一个不曾起舞的日子，都是对生命的辜负'],
+      typeSpeed: 200, //打印的速度。数值越大，速度越慢
+      loop: true, //开启循环
+      loopCount: Infinity, //设置循环次数
+      backSpeed: 50, //延迟时间后才后退，值越大，延迟的时间就越长
+      cursorChar: '^ω^' //光标的符号
+  };
+  var typed = new Typed('#description', options);
 </script>

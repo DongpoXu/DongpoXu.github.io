@@ -173,7 +173,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+        <p class="site-subtitle"><span id="description"></span></p>
       
   </div>
 
@@ -537,6 +537,15 @@
 <p>从《设计模式》副标题“可复用面向对象软件的基础”可以知道，这本书理应教我们如何编写可复用的面向对象程序。这本书把大多数笔墨都放在如何封装变化上面，这跟编写可复用的面向对象程序是不矛盾的。当我们想办法把程序中变化的部分封装好之后，剩下的即是稳定而可复用的部分。</p>
 
       
+      <div>
+        
+          <div>
+  
+    <div style="text-align:center;color: #555;font-size:18px;">End~~ <i class="fa fa-paw"></i> 撒花ฅ>ω<*ฅ花撒</div>
+  
+</div>
+        
+      </div>
     </div>
     
     
@@ -1282,14 +1291,16 @@
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 
+<script type="text/javascript" src="https://cdn.bootcss.com/typed.js/2.0.5/typed.js"></script>
+
 <script>
-var options = {
-    strings: ['123412551', ' 1234155266'],
-    typeSpeed: 120, //打印的速度。数值越大，速度越慢
-    loop: true, //开启循环
-    loopCount: Infinity, //设置循环次数，值为：Infinity，也可以使用数值
-    backSpeed: 20, //延迟时间后才后退，值越大，延迟的时间就越长
-    cursorChar: '^' //光标的符号，比如：
-};
-var typed = new Typed('#description', options);
+  var options = {
+      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华。不见子都，乃见狂且', '树深时见鹿，溪午不闻钟', '每一个不曾起舞的日子，都是对生命的辜负'],
+      typeSpeed: 200, //打印的速度。数值越大，速度越慢
+      loop: true, //开启循环
+      loopCount: Infinity, //设置循环次数
+      backSpeed: 50, //延迟时间后才后退，值越大，延迟的时间就越长
+      cursorChar: '^ω^' //光标的符号
+  };
+  var typed = new Typed('#description', options);
 </script>
