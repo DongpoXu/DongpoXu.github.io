@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="问题,Python,爬虫," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在学习 python 爬虫时，定向爬取淘宝的搜索界面，并没有爬取到数据，让我们来看看发生了什么？ 课程来源慕课大学 北京理工大学国家精品课程 《Python 网络爬虫与信息提取》 第三章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬取淘宝商品">
+<meta property="og:url" content="https://www.xudongpo.cn/posts/8f666c53/index.html">
+<meta property="og:site_name" content="Xu-Blog">
+<meta property="og:description" content="在学习 python 爬虫时，定向爬取淘宝的搜索界面，并没有爬取到数据，让我们来看看发生了什么？ 课程来源慕课大学 北京理工大学国家精品课程 《Python 网络爬虫与信息提取》 第三章">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/8f666c53/%E6%9F%A5%E8%AF%A2cookie.png">
+<meta property="article:published_time" content="2019-04-11T04:24:06.000Z">
+<meta property="article:modified_time" content="2019-04-13T01:32:14.000Z">
+<meta property="article:author" content="Dongpo Xu">
+<meta property="article:tag" content="问题">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.xudongpo.cn/posts/8f666c53/%E6%9F%A5%E8%AF%A2cookie.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xudongpo.cn/posts/8f666c53/"/>
+
+
+
+
+
+  <title>Python爬取淘宝商品 | Xu-Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sentence">
+          <a href="/sentence/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            句子
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photos">
+          <a href="/photos/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xudongpo.cn/posts/8f666c53/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongpo Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python爬取淘宝商品</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T12:24:06+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习 python 爬虫时，定向爬取淘宝的搜索界面，并没有爬取到数据，让我们来看看发生了什么？</p>
+<h2 id="课程来源"><a href="#课程来源" class="headerlink" title="课程来源"></a>课程来源</h2><p><strong>慕课大学</strong> 北京理工大学国家精品课程 <a href="https://www.icourse163.org/course/BIT-1001870001" target="_blank" rel="noopener">《Python 网络爬虫与信息提取》</a> 第三章</p>
+<a id="more"></a>
+
+<h2 id="淘宝商品比价定向爬虫"><a href="#淘宝商品比价定向爬虫" class="headerlink" title="淘宝商品比价定向爬虫"></a>淘宝商品比价定向爬虫</h2><h3 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h3><ul>
+<li>目标：获取淘宝搜索页面的信息，提取其中的商品名称和价格</li>
+<li>理解：淘宝的搜索接口以及翻页的处理</li>
+</ul>
+<h3 id="程序的结构设计"><a href="#程序的结构设计" class="headerlink" title="程序的结构设计"></a>程序的结构设计</h3><ol>
+<li>提交商品搜索请求，循环获取页面</li>
+<li>对于每个页面，提取商品名称和价格信息</li>
+<li>将信息输出</li>
+</ol>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><h3 id="爬取成功，数据有问题"><a href="#爬取成功，数据有问题" class="headerlink" title="爬取成功，数据有问题"></a>爬取成功，数据有问题</h3><p>打印 html 文件，返回如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">  TRLang = &#123;</span><br><span class="line"><span class="actionscript">    ERROR_NICK_BLANK: <span class="string">"请填写账户名"</span>,</span></span><br><span class="line"><span class="actionscript">    ERROR_PASSWORD_BLANK: <span class="string">"请输入密码"</span>,</span></span><br><span class="line"><span class="actionscript">    ERROR_NICK_PASSWORD_BLANK: <span class="string">"请输入账户名和密码"</span>,</span></span><br><span class="line"><span class="actionscript">    ERROR_CHECKCODE_BLANK: <span class="string">"请输入验证码"</span>,</span></span><br><span class="line"><span class="actionscript">    TIPS_REMEMBER_PASSWORD: <span class="string">"记住密码"</span>,</span></span><br><span class="line"><span class="actionscript">    TIPS_NOT_REMEMBER_PSW_ON_PUBLIC: <span class="string">"不要在公共计算机记住密码，防止账户被盗"</span></span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>觉得应该是用户并未登陆问题，应该是淘宝的反爬虫机制导致。</p>
+<hr>
+<h2 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h2><ol>
+<li>登陆淘宝，打开开发者模式，例如 Chrome 右键检查</li>
+<li>点选 NetWork，DOC，然后刷新页面，在 network 中选择 doc，在请求的 headers 中搜索 cookie</li>
+<li>获取对应的 cookie 以及 user-agent</li>
+<li>在代码中添加到 headers 里面</li>
+</ol>
+<p><img src="/posts/8f666c53/%E6%9F%A5%E8%AF%A2cookie.png" alt="查询cookie"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def getHTMLText(url):</span><br><span class="line">  kv = &#123;</span><br><span class="line">    <span class="string">'cookie'</span>: <span class="string">'adsgadfafegadsgadsfaefasdfaewfadsfag'</span></span><br><span class="line">    <span class="string">'uaer-agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">    r = requests.get(url, headers=kv, timeout=<span class="number">30</span>)</span><br><span class="line">    r.raise_for_status()</span><br><span class="line">    r.encoding = r.apparent_encoding</span><br><span class="line">    <span class="keyword">return</span> r.text</span><br><span class="line">  except:</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"gg"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="补充问题"><a href="#补充问题" class="headerlink" title="补充问题"></a>补充问题</h2><p><strong>2019-05-06 更新</strong>：还遇到了一种问题，就是在 url 为 http 时，即使添加了 cookie 和 user-agent 也无法获取信息。</p>
+<p>猜测是因为重定向导致的问题。</p>
+<p>首先简单介绍一下 requests 库的一个高级用法 Session 会话对象</p>
+<p><strong>会话对象</strong>让你能够跨请求保持某些参数。它也会在同一个 Session 实例发出的所有请求之间保持 cookie。所以如果你向同一主机发送多个请求，底层的 TCP 连接将会被重用，从而带来显著的性能提升。(参见 <a href="https://en.wikipedia.org/wiki/HTTP_persistent_connection" target="_blank" rel="noopener">HTTP persistent connection</a>).</p>
+<p>这个问题经过观察发现，重定向之后 cookie 信息并没有被保存下来（返回的 html 还是让用户登陆），我们就需要用使用 Session 保存 cookie 信息。使用 Session 后，更新 cookie 并没有成功。</p>
+<p>然后将矛头转向 cookie 去哪里了，发现问题是因为 requests 的 session 方法保持 cookie 只能保持 cookiejar 类型的 cookie，而我们手动构建的 cookie 是 dict 类型的，所以需要将 dict 转化为 cookiejar 类型。</p>
+<p>查阅得方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将CookieJar转为字典：</span></span><br><span class="line">cookies = requests.utils.dict_from_cookiejar(r.cookies)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将字典转为CookieJar：</span></span><br><span class="line">cookies = requests.utils.cookiejar_from_dict(cookie_dict, cookiejar=<span class="literal">None</span>, overwrite=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#其中cookie_dict是要转换字典</span></span><br><span class="line">转换完之后就可以把它赋给cookies 并传入到session中了：</span><br><span class="line">s = requests.Session()</span><br><span class="line">s.cookies = cookies</span><br></pre></td></tr></table></figure>
+
+<p>具体代码很简单，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cookie_dict = &#123;<span class="string">'cookie'</span>: <span class="string">'adgfadsgadsgasf'</span>&#125;</span><br><span class="line">cookies = requests.utils.cookiejar_from_dict(cookie_dict, cookiejar=<span class="literal">None</span>, overwrite=<span class="literal">True</span>)</span><br><span class="line">S = requests.Session()</span><br><span class="line">S.cookies = cookies;</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    r = S.get(url, headers=headers, timeout=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>补充</strong>：其实只要用 cookies 属性的 update 方法更新 cookie 就行了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cookie_dict &#x3D; &#123;&quot;a&quot;:1&#125;</span><br><span class="line">s &#x3D; requests.Session()</span><br><span class="line">s.cookies.update(cookie_dict)</span><br><span class="line">s.get(url)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>具体代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cookie_dict = &#123;<span class="string">'cookie'</span>: <span class="string">'adsgadsgasd'</span>&#125;</span><br><span class="line">S = requests.Session()</span><br><span class="line">S.cookies.update(cookie_dict)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    r = S.get(url, headers=headers, timeout=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<p>之前的方法虽然也可以用，但相对比较繁琐。</p>
+<p>感谢：<a href="https://blog.csdn.net/a583179/article/details/78904645" target="_blank" rel="noopener">关于 requests 的 session 方法保持不了 cookie 的问题</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%97%AE%E9%A2%98/" rel="tag"># 问题</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/5b1da34a/" rel="next" title="Hexo的那些事儿">
+                <i class="fa fa-chevron-left"></i> Hexo的那些事儿
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/f4d63b4/" rel="prev" title="Hexo添加页面崩溃欺骗">
+                Hexo添加页面崩溃欺骗 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongpo Xu</p>
+              <p class="site-description motion-element" itemprop="description">许东坡的个人博客，未来的日子一起努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zpm683.xyz" title="午後のお茶で一杯" target="_blank">午後のお茶で一杯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cduyzh.com" title="Water Sister's Blog" target="_blank">Water Sister's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://itscloudy.gitee.io/blog/" title="ItsCloudy" target="_blank">ItsCloudy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cherryblog.site/" title="CherryBlog" target="_blank">CherryBlog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://asdfv1929.github.io/" title="1929's Home" target="_blank">1929's Home</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程来源"><span class="nav-number">1.</span> <span class="nav-text">课程来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#淘宝商品比价定向爬虫"><span class="nav-number">2.</span> <span class="nav-text">淘宝商品比价定向爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能描述"><span class="nav-number">2.1.</span> <span class="nav-text">功能描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的结构设计"><span class="nav-number">2.2.</span> <span class="nav-text">程序的结构设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到问题"><span class="nav-number">3.</span> <span class="nav-text">遇到问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#爬取成功，数据有问题"><span class="nav-number">3.1.</span> <span class="nav-text">爬取成功，数据有问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理方法"><span class="nav-number">4.</span> <span class="nav-text">处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充问题"><span class="nav-number">5.</span> <span class="nav-text">补充问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-spinner"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongpo Xu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

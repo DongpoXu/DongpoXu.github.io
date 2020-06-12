@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,设计模式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="代理模式(Proxy)   为一个对象提供一个代用品或占位符，以便控制对它们的访问。  代理模式是一种非常有意义的模式，在生活中可以找到很多代理模式的场景。比如，明星都有经纪人作为代理。 代理模式的关键是，当客户不方便直接访问一个对象或者不满足需要的时候，提供一个替身对象来控制对这个对象的访问，客户实际上访问的是替身对象。替身对象对请求做出做出一些处理之后，再把请求转交给本体对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS设计模式-代理模式">
+<meta property="og:url" content="https://www.xudongpo.cn/posts/31856cc3/index.html">
+<meta property="og:site_name" content="Xu-Blog">
+<meta property="og:description" content="代理模式(Proxy)   为一个对象提供一个代用品或占位符，以便控制对它们的访问。  代理模式是一种非常有意义的模式，在生活中可以找到很多代理模式的场景。比如，明星都有经纪人作为代理。 代理模式的关键是，当客户不方便直接访问一个对象或者不满足需要的时候，提供一个替身对象来控制对这个对象的访问，客户实际上访问的是替身对象。替身对象对请求做出做出一些处理之后，再把请求转交给本体对象。">
+<meta property="article:published_time" content="2019-05-27T06:55:17.000Z">
+<meta property="article:modified_time" content="2019-05-27T06:55:17.000Z">
+<meta property="article:author" content="Dongpo Xu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xudongpo.cn/posts/31856cc3/"/>
+
+
+
+
+
+  <title>JS设计模式-代理模式 | Xu-Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sentence">
+          <a href="/sentence/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            句子
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photos">
+          <a href="/photos/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xudongpo.cn/posts/31856cc3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongpo Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS设计模式-代理模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-27T14:55:17+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="font-size:20px;font-weight:800;">代理模式(Proxy)</p>
+
+<blockquote>
+<p><strong>为一个对象提供一个代用品或占位符，以便控制对它们的访问。</strong></p>
+</blockquote>
+<p>代理模式是一种非常有意义的模式，在生活中可以找到很多代理模式的场景。比如，明星都有经纪人作为代理。</p>
+<p>代理模式的关键是，当客户不方便直接访问一个对象或者不满足需要的时候，提供一个替身对象来控制对这个对象的访问，客户实际上访问的是替身对象。替身对象对请求做出做出一些处理之后，再把请求转交给本体对象。</p>
+<a id="more"></a>
+
+<h2 id="小明追-MM"><a href="#小明追-MM" class="headerlink" title="小明追 MM"></a>小明追 MM</h2><p>小明追女孩 A，因为内向，所以找了他和 A 的共同好友 B，帮助小明完成送花的壮举。首先看看不实用代理的情况：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Flower = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = &#123;</span><br><span class="line">  sendFlower: <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower();</span><br><span class="line">    target.receiveFlower(flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"收到花"</span> + flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.sendFlower(A);</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们引入代理 B，小明通过 B 来给 A 送花：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Flower = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = &#123;</span><br><span class="line">  sendFlower: <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower();</span><br><span class="line">    target.receiveFlower(flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    A.receiveFlower(flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"收到花"</span> + flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.sendFlower(B);</span><br></pre></td></tr></table></figure>
+
+<p>显然第二段结果和第一段一样，这是最简单的代理模式的编写。从这段代码看起来，代理模式除了把事情变得复杂没啥用了。但是如果 A 在不同的情况下接收到花会有不同的结果，如果小明送花的时候不合时宜，那就不会有正确的结果了。但是 B 很了解 A，她知道 A 什么时候心情好，所以这时候代理的用处就来了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Flower = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = &#123;</span><br><span class="line">  sendFlower: <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower();</span><br><span class="line">    target.receiveFlower(flower);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    A.listenGooodMood(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 监听A的状态</span></span><br><span class="line">      A.receiveFlower(flower);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"收到花"</span> + flower);</span><br><span class="line">  &#125;</span><br><span class="line">  listenGoodMood:<span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="comment">// 假定10秒后心情变好</span></span><br><span class="line">      fn();</span><br><span class="line">    &#125;,<span class="number">10000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.sendFlower(B);</span><br></pre></td></tr></table></figure>
+
+<p>预祝小明求爱成功。</p>
+<h2 id="保护代理和虚拟代理"><a href="#保护代理和虚拟代理" class="headerlink" title="保护代理和虚拟代理"></a>保护代理和虚拟代理</h2><p>虽然这是一个虚拟案例，但是我们从中可以看到两种代理模式的身影。代理 B 可以帮助 A 过滤掉一些请求，比如送花的人中年龄太大的或者没有宝马的，这种请求就可以直接在代理 B 处被拒绝掉。这种代理就叫做<strong>保护代理</strong>。</p>
+<p>另外，在程序世界中，new Flower 是一个代价昂贵的操作，我们可以把 new Flower 的操作交给代理 B 去执行，代理 B 会在 A 心情好的时候去 new Flower，这是代理的另一种模式，称为<strong>虚拟代理</strong>。虚拟代理会把一些开销很大的对象，延迟到真正需要它的时候才去创建。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params">flower</span>) </span>&#123;</span><br><span class="line">    A.listenGoodMood(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower();</span><br><span class="line">      A.receiveFlower(flower);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>保护代理用于控制不同权限的对象对目标对象的访问，但在 JavaScript 并不容易实现保护代理，因为我们无法判断谁访问了某个对象。而虚拟代理是最常用的一种代理模式。</p>
+</blockquote>
+<p>接下来我们看一个真实案例。</p>
+<h2 id="虚拟代理实现图片预加载"><a href="#虚拟代理实现图片预加载" class="headerlink" title="虚拟代理实现图片预加载"></a>虚拟代理实现图片预加载</h2><p>在 Web 开发中，图片预加载是一种常用的技术，如果直接给 img 标签节点设置 src 属性，由于图片过大或者网络不佳，图片的位置往往会有段时间是一片空白。常见做法是先用一张 loading 图片占位，然后用异步的方式加载图片，等图片加载好了再把它填充到 img 节点里，这种场景就很适合使用虚拟代理。</p>
+<p>下面我们来实现这个虚拟代理，首先创建一个普通的本体对象，这个对象负责往页面中创建一个 img 标签，并且提供一个对外的 setSrc 接口，外界调用这个接口，便可以给该 img 标签设置 src 属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">      imgNode.src = src;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myImage.setSrc(<span class="string">"http://x/x/x.jpg"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>现在引入代理对象 proxyImage，通过这个代理对象，在图片真正被加载好之前，页面中将出现一张占位图，来提示用户图片正在加载。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">      imgNode.src = src;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    myImage.setSrc(<span class="keyword">this</span>.src);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">      myImage.setSrc(<span class="string">"file://x/x/x.jpg"</span>);</span><br><span class="line">      img.src = src;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">proxyImage.setSrc(<span class="string">"http://x/x/x.jpg"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们通过 proxyImage 间接的访问 MyImage。proxyImage 控制了客户对 MyImage 的访问，并且在此过程中加入一些额外操作，比如在图片加载好之前，先把 img 的节点设置为一张本地图片。</p>
+<h2 id="代理的意义"><a href="#代理的意义" class="headerlink" title="代理的意义"></a>代理的意义</h2><p>不用代理的预加载图片函数实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line"></span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    imgNode.src = img.src;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">      imgNode.src = <span class="string">"file://x/x/x.jpg"</span>;</span><br><span class="line">      img.src = src;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">MyImage.setSrc(<span class="string">"http://x/x/x.jpg"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>为了说明代理的意义，我们引入一个面向对象设计的原则——<strong>单一职责原则</strong></p>
+<p>单一职责原则指的是：就<strong>一个类</strong>(通常也包括对象和函数等)而言，应当<strong>仅有一个</strong>引起它变化的原因。</p>
+<p>如果一个对象承担了多项职责，就意味着这个对象将变得巨大，引起它变化的原因可能会有多个。面向对象设计鼓励将行为分布到细粒度的对象之中，如果一个对象承担的职责过多，等于把这些职责耦合到了一起，这种耦合会导致脆弱和低内聚的设计。当变化发生时，设计可能会遭到意外的破坏。</p>
+<p>纵观整个程序，我们并没有改变或者增加 MyImage 的接口，但是通过代理对象，实际上给系统添加了新的行为。这是符合<strong>开放-封闭原则</strong>的。给 img 节点设置 src 和图片预加载这两个功能，被隔离在两个对象里，它们可以各自变化而不影响对方。何况就算有一天我们不需要预加载了，那么我们只需要改为请求本体而不是请求代理对象即可。</p>
+<h2 id="代理和本体接口的一致性"><a href="#代理和本体接口的一致性" class="headerlink" title="代理和本体接口的一致性"></a>代理和本体接口的一致性</h2><p>如果我们有一天不需要预加载功能了，我们可以直接将目标指向本体。在客户看来，代理对象和本体是一致的，代理接手请求的过程对于用户来说是透明的，用户并不清楚代理和本体的区别，这样有两个好处：</p>
+<ul>
+<li>用户可以放心的请求代理，他只关心是否能得到想要的结果。</li>
+<li>在任何使用本体的地方都可以替换成使用代理。</li>
+</ul>
+<p>在 JAVA 中，代理和本体都要显式的实现同一个接口才行，一方面接口保证了它们会拥有同样的方法，另一方面，面向接口编程迎合依赖倒置原则，通过接口进行向上转型，从而避开编译器的类型检查，代理和本体将来可以被替换使用。</p>
+<p>但是在 JS 这类动态语言中，我们有时通过鸭子类型检测代理和本体是否都实现了 setSrc 方法，另外大多数时候干脆不做检查，全靠自觉。</p>
+<p>另外：如果代理对象和本体对象都为一个函数(函数也是对象)，函数必然都能被执行，则认为它们也具有一致的“接口”，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">    imgNode.src = src;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    myImage.setSrc(<span class="keyword">this</span>.src);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">    myImage.setSrc(<span class="string">"file://x/x/x.jpg"</span>);</span><br><span class="line">    img.src = src;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">proxyImage(<span class="string">"http://x/x/x.jpg"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="虚拟代理合并-HTTP-请求"><a href="#虚拟代理合并-HTTP-请求" class="headerlink" title="虚拟代理合并 HTTP 请求"></a>虚拟代理合并 HTTP 请求</h2><p>先想象这样一个场景：每周我们都要写一份工作周报，周报要交给总监，总监手下管理着 150 个员工，如果我们每个人都直接把周报发给总监，总监估计要 GG。</p>
+<p>现在我们把周报发给组长，组长作为代理，把内容提炼后一次性发给总监。</p>
+<p>这个例子在程序世界里很容易引起共鸣，<strong>在 Web 开发中，也许最大的开销就是网络请求</strong>。假设我们在做一个文件同步的功能，当我们选中 checkbox 的时候，它对应的文件就会被同步到另一台备用服务器上面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> syncronousFile = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"开始同步文件，id为："</span> + id);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> checkbox = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, c; (c = checkbox[i++]); ) &#123;</span><br><span class="line">  c.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.checked === <span class="literal">true</span>) &#123;</span><br><span class="line">      synchronousFile(<span class="keyword">this</span>.id);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可想而知，我们点了 3 个 checkbox，依次往服务器发送了 3 次文件同步的请求。可以预见，如此频繁的网络操作会带来相当大的开销。</p>
+<p>解决方案是，我们可以通过一个代理函数 proxySynchronousFile 来收集一段时间之内的请求，最后一次性发送给服务器，比如说我们等待 2 秒之后才把这 2 秒之内需要同步的文件 ID 打包发送给服务器，如果不是实时性非常高的系统，2 秒的延迟不会有太大副作用，却能大大减少服务器压力。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> syncronousFile = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"开始同步文件，id为："</span> + id);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxySynchronousFile = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = [], <span class="comment">// 保存一段时间内需要同步的ID</span></span><br><span class="line">    timer; <span class="comment">// 定时器</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    cache.push(id);</span><br><span class="line">    <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">      <span class="comment">// 保证不会覆盖已经启动的定时器</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      syncronousFile(cache.join(<span class="string">","</span>)); <span class="comment">// 2秒后向本体发送需要同步的ID集合</span></span><br><span class="line">      clearTimeout(timer); <span class="comment">// 清空定时器</span></span><br><span class="line">      timer = <span class="literal">null</span>;</span><br><span class="line">      cache.length = <span class="number">0</span>; <span class="comment">// 清空ID集合</span></span><br><span class="line">    &#125;，<span class="number">2000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> checkbox = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, c; (c = checkbox[i++]); ) &#123;</span><br><span class="line">  c.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.checked === <span class="literal">true</span>) &#123;</span><br><span class="line">      proxySynchronousFile(<span class="keyword">this</span>.id);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟代理在惰性加载中的应用"><a href="#虚拟代理在惰性加载中的应用" class="headerlink" title="虚拟代理在惰性加载中的应用"></a>虚拟代理在惰性加载中的应用</h3><p>惰性加载 emmm 就是延迟加载，或者说在需要的情况下进行加载，例如：无限滚动、瀑布流，这是一种设计模式。</p>
+<h2 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h2><p>缓存代理可以为一些开销打的运算结果提供暂时的存储，在下次运算时，如果传递进来的参数和之前的一致，则可以直接返回前面存储的运算结果。</p>
+<h3 id="缓存代理例子——计算乘积"><a href="#缓存代理例子——计算乘积" class="headerlink" title="缓存代理例子——计算乘积"></a>缓存代理例子——计算乘积</h3><p>先创建一个用于求乘积的函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mult = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"开始计算乘积"</span>);</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; <span class="number">1</span>; i++) &#123;</span><br><span class="line">    a = a * <span class="built_in">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">mult(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 6</span></span><br><span class="line">mult(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>); <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<p>现在加入缓存代理函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> proxyMult = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call(<span class="built_in">arguments</span>, <span class="string">","</span>);</span><br><span class="line">    <span class="keyword">if</span> (args <span class="keyword">in</span> cache) &#123;</span><br><span class="line">      <span class="keyword">return</span> cache[args];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (cache[args] = mult.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>));</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">proxyMult(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>); <span class="comment">// 24</span></span><br><span class="line">proxyMult(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>); <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们第二次调用 proxyMult(1,2,3,4)的时候，本体 mult 函数并没有被计算，proxyMult 直接返回了之前缓存好的计算结果。</p>
+<p>通过增加缓存代理的方式，mult 函数可以继续专注于自身的职责——计算乘积，缓存的功能是由代理对象实现的。</p>
+<h3 id="缓存代理用于-ajax-异步请求数据"><a href="#缓存代理用于-ajax-异步请求数据" class="headerlink" title="缓存代理用于 ajax 异步请求数据"></a>缓存代理用于 ajax 异步请求数据</h3><p>我们常在项目中遇到分页的需求，同一页的数据理论上只需要去后台拉取一次，这些已经拉取到的数据在某个地方被缓存之后，下次再请求同一页的时候，便可以直接使用之前的数据。</p>
+<p>显然这里也可以引入缓存代理，实现方式跟计算乘积的例子差不多，唯一不同的是，请求数据是个异步的操作，我们无法直接把计算结果放到代理对象的缓存中，而是要通过回调的方式。</p>
+<h2 id="用高阶函数动态创建代理"><a href="#用高阶函数动态创建代理" class="headerlink" title="用高阶函数动态创建代理"></a>用高阶函数动态创建代理</h2><p>通过传入高阶函数这种更加灵活的方式，可以为各种计算方法创建缓存代理。现在这些计算方法被当作参数传入一个专门用于创建缓存代理的工厂中，这样一来，我们就可以为乘法、加法、减法等创建缓存代理，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/********** 计算乘积 **********/</span></span><br><span class="line"><span class="keyword">var</span> mult = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; <span class="number">1</span>; i++) &#123;</span><br><span class="line">    a = a * <span class="built_in">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********** 计算加和 **********/</span></span><br><span class="line"><span class="keyword">var</span> plus = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; <span class="number">1</span>; i++) &#123;</span><br><span class="line">    a = a + <span class="built_in">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********** 创建缓存代理的工厂 **********/</span></span><br><span class="line"><span class="keyword">var</span> createProxyFactory = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call(<span class="built_in">arguments</span>, <span class="string">","</span>);</span><br><span class="line">    <span class="keyword">if</span> (args <span class="keyword">in</span> cache) &#123;</span><br><span class="line">      <span class="keyword">return</span> cache[args];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (cache[args] = fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>));</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxyMult = createProxyFactory(mult),</span><br><span class="line">  proxyPlus = createProxyFactory(plus);</span><br><span class="line"></span><br><span class="line">alert(proxyMult(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)); <span class="comment">// 24</span></span><br><span class="line">alert(proxyMult(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)); <span class="comment">// 24</span></span><br><span class="line">alert(proxyPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)); <span class="comment">// 10</span></span><br><span class="line">alert(proxyPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他代理模式"><a href="#其他代理模式" class="headerlink" title="其他代理模式"></a>其他代理模式</h2><p>代理模式的变体种类非常多，限于篇幅以及在 JS 的适用性，就只说这些代理，不一一详解。</p>
+<ul>
+<li>防火墙代理：控制网络资源的访问，保护主题不让“坏人”接近。</li>
+<li>远程代理：为一个对象在不同的地址空间提供局部代表，在 JAVA 中，远程代理可以是另一个虚拟机重的对象。</li>
+<li>保护代理：用于对象应该有不同访问权限的情况。</li>
+<li>智能引用代理：取代了简单的指针，它在访问对象时执行一些附加操作，比如计算一个对象被引用的次数。</li>
+<li>写时复制代理：通常用于复制一个庞大对象的情况。写时复制代理延迟了复制的过程，当对象被真正修改时，才对它进行复制操作。写时复制代理是虚拟代理的一种变体，DLL(操作系统中的动态链接库)是其典型运动场景。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>代理模式包括许多小分类，在 JavaScript 开发中最常用的是虚拟代理和缓存代理。虽然代理模式非常游泳，但我们在编写业务代码的时候，往往不需要去预先猜测是否需要使用代理模式。当真正发现不方便直接访问某个对象的时候，再编写代理也不迟。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3837d4a2/" rel="next" title="JS设计模式-策略模式">
+                <i class="fa fa-chevron-left"></i> JS设计模式-策略模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/6b13abeb/" rel="prev" title="Hexo升级NexT">
+                Hexo升级NexT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongpo Xu</p>
+              <p class="site-description motion-element" itemprop="description">许东坡的个人博客，未来的日子一起努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zpm683.xyz" title="午後のお茶で一杯" target="_blank">午後のお茶で一杯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cduyzh.com" title="Water Sister's Blog" target="_blank">Water Sister's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://itscloudy.gitee.io/blog/" title="ItsCloudy" target="_blank">ItsCloudy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cherryblog.site/" title="CherryBlog" target="_blank">CherryBlog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://asdfv1929.github.io/" title="1929's Home" target="_blank">1929's Home</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#小明追-MM"><span class="nav-number">1.</span> <span class="nav-text">小明追 MM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护代理和虚拟代理"><span class="nav-number">2.</span> <span class="nav-text">保护代理和虚拟代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟代理实现图片预加载"><span class="nav-number">3.</span> <span class="nav-text">虚拟代理实现图片预加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理的意义"><span class="nav-number">4.</span> <span class="nav-text">代理的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理和本体接口的一致性"><span class="nav-number">5.</span> <span class="nav-text">代理和本体接口的一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟代理合并-HTTP-请求"><span class="nav-number">6.</span> <span class="nav-text">虚拟代理合并 HTTP 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟代理在惰性加载中的应用"><span class="nav-number">6.1.</span> <span class="nav-text">虚拟代理在惰性加载中的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存代理"><span class="nav-number">7.</span> <span class="nav-text">缓存代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存代理例子——计算乘积"><span class="nav-number">7.1.</span> <span class="nav-text">缓存代理例子——计算乘积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存代理用于-ajax-异步请求数据"><span class="nav-number">7.2.</span> <span class="nav-text">缓存代理用于 ajax 异步请求数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用高阶函数动态创建代理"><span class="nav-number">8.</span> <span class="nav-text">用高阶函数动态创建代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他代理模式"><span class="nav-number">9.</span> <span class="nav-text">其他代理模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">10.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-spinner"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongpo Xu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

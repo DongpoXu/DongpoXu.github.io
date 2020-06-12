@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo,插件,功能," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为自己的博客添加以下功能：  评论、打赏 动态玩偶 点击红心 网易云音乐 分享功能  目的美化自己的博客，给博客添加评论、打赏、玩偶、红心、分享以及网易云音乐功能，让博客变得精彩，让生活变得精彩。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo添加各种功能">
+<meta property="og:url" content="https://www.xudongpo.cn/posts/515a5aad/index.html">
+<meta property="og:site_name" content="Xu-Blog">
+<meta property="og:description" content="为自己的博客添加以下功能：  评论、打赏 动态玩偶 点击红心 网易云音乐 分享功能  目的美化自己的博客，给博客添加评论、打赏、玩偶、红心、分享以及网易云音乐功能，让博客变得精彩，让生活变得精彩。">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/515a5aad/%E6%9D%A5%E5%BF%85%E5%8A%9B%E5%AE%89%E8%A3%85.png">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/515a5aad/%E6%9D%A5%E5%BF%85%E5%8A%9B%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/515a5aad/%E7%BD%91%E6%98%93%E4%BA%91%E7%94%9F%E6%88%90%E5%A4%96%E9%93%BE.png">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/515a5aad/%E5%A4%96%E9%93%BE%E5%86%85%E5%AE%B9.png">
+<meta property="og:image" content="https://www.xudongpo.cn/posts/515a5aad/%E7%BD%91%E6%98%93%E4%BA%91%E6%95%88%E6%9E%9C%E5%9B%BE.png">
+<meta property="article:published_time" content="2019-04-18T09:50:08.000Z">
+<meta property="article:modified_time" content="2019-04-21T04:34:55.000Z">
+<meta property="article:author" content="Dongpo Xu">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="插件">
+<meta property="article:tag" content="功能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.xudongpo.cn/posts/515a5aad/%E6%9D%A5%E5%BF%85%E5%8A%9B%E5%AE%89%E8%A3%85.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xudongpo.cn/posts/515a5aad/"/>
+
+
+
+
+
+  <title>Hexo添加各种功能 | Xu-Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sentence">
+          <a href="/sentence/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            句子
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photos">
+          <a href="/photos/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xudongpo.cn/posts/515a5aad/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongpo Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo添加各种功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T17:50:08+08:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为自己的博客添加以下功能：</p>
+<ul>
+<li>评论、打赏</li>
+<li>动态玩偶</li>
+<li>点击红心</li>
+<li>网易云音乐</li>
+<li>分享功能</li>
+</ul>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>美化自己的博客，给博客添加评论、打赏、玩偶、红心、分享以及网易云音乐功能，让博客变得精彩，让生活变得精彩。</p>
+<a id="more"></a>
+
+<h2 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h2><p>hexo 支持很多外部评论插件:</p>
+<ul>
+<li>HyperComments: <strong><a href="https://www.hypercomments.com" target="_blank" rel="noopener">https://www.hypercomments.com</a></strong> （来自俄罗斯的评论系统，使用谷歌账号注册。有墙，有时不太方便）</li>
+<li>来必力: <strong><a href="https://livere.com" target="_blank" rel="noopener">https://livere.com</a></strong> （来自韩国，使用邮箱注册）</li>
+<li>畅言: <strong><a href="http://changyan.kuaizhan.com" target="_blank" rel="noopener">http://changyan.kuaizhan.com</a></strong> （安装需要备案号，不太好用）</li>
+<li>Gitment: <strong><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">https://github.com/imsun/gitment</a></strong> （据说有些小 bug，比如说每次需要手动初始化，登录时会跳到主页）</li>
+<li>Valine: <strong><a href="https://github.com/xCss/Valine" target="_blank" rel="noopener">https://github.com/xCss/Valine</a></strong> (基于 Leancloud 的极简风评论系统）</li>
+</ul>
+<p>我选用了 <strong><a href="https://www.livere.com" target="_blank" rel="noopener">来必力</a></strong>，因为 <strong><a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">NexT 官方文档</a></strong> 中这个比较简单。</p>
+<h3 id="第一步：注册账号"><a href="#第一步：注册账号" class="headerlink" title="第一步：注册账号"></a>第一步：注册账号</h3><p>在来必力官网：<strong><a href="https://www.livere.com" target="_blank" rel="noopener">https://www.livere.com</a></strong> 注册账号。</p>
+<h3 id="第二步：安装"><a href="#第二步：安装" class="headerlink" title="第二步：安装"></a>第二步：安装</h3><p>点击最上方的安装，选择 City 免费版本。</p>
+<p><img src="/posts/515a5aad/%E6%9D%A5%E5%BF%85%E5%8A%9B%E5%AE%89%E8%A3%85.png" alt="来必力安装"></p>
+<p>点击现在安装。出现如下界面</p>
+<p><img src="/posts/515a5aad/%E6%9D%A5%E5%BF%85%E5%8A%9B%E4%BB%A3%E7%A0%81.png" alt="来必力代码"></p>
+<p>选中 <strong>uid</strong> 并复制。</p>
+<h3 id="第三步：配置"><a href="#第三步：配置" class="headerlink" title="第三步：配置"></a>第三步：配置</h3><p>打开主题配置文件 <strong>_config.yml</strong>，定位到 livere_uid 字段，粘贴上刚刚复制的 UID。完成。</p>
+<h2 id="打赏功能"><a href="#打赏功能" class="headerlink" title="打赏功能"></a>打赏功能</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><p>打赏功能，不需要太复杂花哨的功能的话，就直接在配置文件中写入图片就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Reward</span><br><span class="line">reward_comment: 如果您读文章后有收获，可以打赏我喝咖啡哦～</span><br><span class="line">wechatpay: &#x2F;images&#x2F;wechat.png</span><br><span class="line">alipay: &#x2F;images&#x2F;alipay.png</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展版本"><a href="#扩展版本" class="headerlink" title="扩展版本"></a>扩展版本</h3><p>自己创建 swig 文件，以及 css 文件。</p>
+<p>如下步骤： 1.在/themes/random/source/css 新建 donate.css</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.donate_bar</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">5%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.donate_bar</span> <span class="selector-tag">a</span><span class="selector-class">.btn_donate</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">82px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">82px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: auto;</span><br><span class="line">  <span class="attribute">margin-right</span>: auto;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(img.gif) no-repeat;</span><br><span class="line">  <span class="attribute">-webkit-transition</span>: background <span class="number">0s</span>;</span><br><span class="line">  <span class="attribute">-moz-transition</span>: background <span class="number">0s</span>;</span><br><span class="line">  <span class="attribute">-o-transition</span>: background <span class="number">0s</span>;</span><br><span class="line">  <span class="attribute">-ms-transition</span>: background <span class="number">0s</span>;</span><br><span class="line">  <span class="attribute">transition</span>: background <span class="number">0s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.donate_bar</span> <span class="selector-tag">a</span><span class="selector-class">.btn_donate</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">82px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.donate_bar</span> <span class="selector-class">.donate_txt</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#9d9d9d</span>;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">14px</span>/<span class="number">2</span> <span class="string">"Microsoft Yahei"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.donate_bar</span><span class="selector-class">.hidden</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.post-donate</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">45px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#donate_guide</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">310px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#donate_guide</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">350px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">350px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.在 themes/random/layout/includes 下新建 donate.swig</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;! -- 添加捐赠图标 --&gt;</span><br><span class="line">&lt;div class &#x3D;&quot;post-donate&quot;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;donate_board&quot; class&#x3D;&quot;donate_bar center&quot;&gt;</span><br><span class="line">        &lt;a id&#x3D;&quot;btn_donate&quot; class&#x3D;&quot;btn_donate&quot; href&#x3D;&quot;javascript:;&quot; title&#x3D;&quot;打赏&quot;&gt;&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;span class&#x3D;&quot;donate_txt&quot;&gt;</span><br><span class="line">           ↑&lt;br&gt;</span><br><span class="line">           喜欢文章就打赏一包辣条吧！</span><br><span class="line">        &lt;&#x2F;span&gt;</span><br><span class="line">        &lt;br&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;donate_guide&quot; class&#x3D;&quot;donate_bar center hidden&quot; &gt;</span><br><span class="line">        &lt;!-- 方式一：</span><br><span class="line">            ![](img.png)</span><br><span class="line">            ![](img.png)</span><br><span class="line">         --&gt;</span><br><span class="line">        &lt;!-- 方式二；</span><br><span class="line">            step1：在_config.yml中添加配置</span><br><span class="line">                Alipay: &#x2F;img&#x2F;Alipay.jpg</span><br><span class="line">                WeChatpay: &#x2F;img&#x2F;WeChatpay.jpg</span><br><span class="line">            step2：此处两张图片的路径分别设置为如下</span><br><span class="line">                &lt;img src&#x3D;&quot;&lt;%- theme.root_url %&gt;&lt;%&#x3D;theme.Alipay%&gt;&quot;</span><br><span class="line">                &lt;img src&#x3D;&quot;&lt;%- theme.root_url %&gt;&lt;%&#x3D;theme.WeChatpay%&gt;&quot;</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;!-- 支付宝打赏图案</span><br><span class="line">        &lt;img src&#x3D;&quot;alipay.png&quot; alt&#x3D;&quot;支付宝打赏&quot;&gt; --&gt;</span><br><span class="line">        &lt;!-- 微信打赏图案 --&gt;</span><br><span class="line">        &lt;img src&#x3D;&quot;wechat.png&quot; alt&#x3D;&quot;微信打赏&quot;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">        document.getElementById(&#39;btn_donate&#39;).onclick &#x3D; function()&#123;</span><br><span class="line">            $(&#39;#donate_board&#39;).addClass(&#39;hidden&#39;);</span><br><span class="line">            $(&#39;#donate_guide&#39;).removeClass(&#39;hidden&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;! -- 添加捐赠图标 --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3.在 post.swig 合适位置中添加(想在那个页面放都可以)，不知道放那的话，在后添加</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;%</span> <span class="string">if</span> <span class="string">theme.donate</span> <span class="string">%&#125;</span></span><br><span class="line">  <span class="string">&#123;%</span> <span class="string">include</span> <span class="string">'includes/donate.swig'</span> <span class="string">%&#125;</span></span><br><span class="line"><span class="string">&#123;%</span> <span class="string">endif</span> <span class="string">%&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>4.打开主题配置文件_config.yml，在里面最后写下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#是否开启打赏功能</span><br><span class="line">donate: true</span><br></pre></td></tr></table></figure>
+
+<h2 id="玩偶功能"><a href="#玩偶功能" class="headerlink" title="玩偶功能"></a>玩偶功能</h2><h3 id="第一步：获取插件"><a href="#第一步：获取插件" class="headerlink" title="第一步：获取插件"></a>第一步：获取插件</h3><p>npm install –save hexo-helper-live2d</p>
+<h3 id="步骤二：选择自己喜欢的萌妹子"><a href="#步骤二：选择自己喜欢的萌妹子" class="headerlink" title="步骤二：选择自己喜欢的萌妹子"></a>步骤二：选择自己喜欢的萌妹子</h3><p>可以到 github 中查看，选择喜欢的妹子造型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">live2d-widget-model-chitose</span><br><span class="line">live2d-widget-model-epsilon2_1</span><br><span class="line">live2d-widget-model-gf</span><br><span class="line">live2d-widget-model-haru&#x2F;01 (use npm install --save live2d-widget-model-haru)</span><br><span class="line">live2d-widget-model-haru&#x2F;02 (use npm install --save live2d-widget-model-haru)</span><br><span class="line">live2d-widget-model-haruto</span><br><span class="line">live2d-widget-model-hibiki</span><br><span class="line">live2d-widget-model-hijiki</span><br><span class="line">live2d-widget-model-izumi</span><br><span class="line">live2d-widget-model-koharu</span><br><span class="line">live2d-widget-model-miku</span><br><span class="line">live2d-widget-model-ni-j</span><br><span class="line">live2d-widget-model-nico</span><br><span class="line">live2d-widget-model-nietzsche</span><br><span class="line">live2d-widget-model-nipsilon</span><br><span class="line">live2d-widget-model-nito</span><br><span class="line">live2d-widget-model-shizuku</span><br><span class="line">live2d-widget-model-tororo</span><br><span class="line">live2d-widget-model-tsumiki</span><br><span class="line">live2d-widget-model-unitychan</span><br><span class="line">live2d-widget-model-wanko</span><br><span class="line">live2d-widget-model-z16</span><br></pre></td></tr></table></figure>
+
+<p>例如我选择： live2d-widget-model-wanko</p>
+<h3 id="步骤三：安装"><a href="#步骤三：安装" class="headerlink" title="步骤三：安装"></a>步骤三：安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-miku</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件 _config.yml 下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw&#x2F;</span><br><span class="line">  pluginJsPath: lib&#x2F;</span><br><span class="line">  pluginModelPath: assets&#x2F;</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-wanko</span><br><span class="line">    scale: 1</span><br><span class="line">    hHeadPos: 0.5</span><br><span class="line">    vHeadPos: 0.618</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br><span class="line">    scale: 0.5</span><br><span class="line">  react:</span><br><span class="line">    opacityDefault: 0.7</span><br><span class="line">    opacityOnHover: 0.2</span><br></pre></td></tr></table></figure>
+
+<p>然而我试了，这个 plug 现在还不是很稳定，配置很多不生效。<br>比如我把配置文件放在系统配置，我的玩偶就变成狗狗了。</p>
+<h2 id="红心功能"><a href="#红心功能" class="headerlink" title="红心功能"></a>红心功能</h2><p>类似页面崩溃欺骗，利用 js 实现即可。</p>
+<p>在/themes/next/source/js/src 下新建文件 clicklove.js ，接着把如下代码粘贴到 clicklove.js 文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#39;&#39;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e&#x3D;0;e&lt;d.length;e++)d[e].alpha&lt;&#x3D;0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+&#x3D;.004,d[e].alpha-&#x3D;.013,d[e].el.style.cssText&#x3D;&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof e.onclick&amp;&amp;e.onclick;e.onclick&#x3D;function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a&#x3D;t.createElement(&quot;div&quot;);a.className&#x3D;&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a&#x3D;t.createElement(&quot;style&quot;);a.type&#x3D;&quot;text&#x2F;css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText&#x3D;e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d&#x3D;[];e.requestAnimationFrame&#x3D;function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3&#x2F;60)&#125;&#125;(),n()&#125;(window,document);</span><br></pre></td></tr></table></figure>
+
+<p>在/themes/next/layout/_layout.swig 文件末尾添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 页面点击小红心 --&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;clicklove.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h2><h3 id="生成外链"><a href="#生成外链" class="headerlink" title="生成外链"></a>生成外链</h3><p>登陆网易云音乐 <strong><a href="http://music.163.com" target="_blank" rel="noopener">http://music.163.com</a></strong> 搜索自己喜欢的音乐，然后点击生成外链</p>
+<p><img src="/posts/515a5aad/%E7%BD%91%E6%98%93%E4%BA%91%E7%94%9F%E6%88%90%E5%A4%96%E9%93%BE.png" alt="网易云生成外链"></p>
+<p>外链内容如下：</p>
+<p><img src="/posts/515a5aad/%E5%A4%96%E9%93%BE%E5%86%85%E5%AE%B9.png" alt="外链内容"></p>
+<h3 id="放置外链"><a href="#放置外链" class="headerlink" title="放置外链"></a>放置外链</h3><p>复制 HTML 代码部分放入自己想要放入的页面位置即可。</p>
+<p>我这里放入了 layout/_macro/sidebar.swig 中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.background_music %&#125;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;iframe frameborder&#x3D;&quot;no&quot; border&#x3D;&quot;0&quot; marginwidth&#x3D;&quot;0&quot; marginheight&#x3D;&quot;0&quot; width&#x3D;330 height&#x3D;86 src&#x3D;&quot;&#x2F;&#x2F;music.163.com&#x2F;outchain&#x2F;player?type&#x3D;2&amp;id&#x3D;36921126&amp;auto&#x3D;1&amp;height&#x3D;66&quot;&gt;&lt;&#x2F;iframe&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>位置自己调整一下就好啦，最终效果图如下：</p>
+<p><img src="/posts/515a5aad/%E7%BD%91%E6%98%93%E4%BA%91%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="网易云效果图"></p>
+<h2 id="分享功能"><a href="#分享功能" class="headerlink" title="分享功能"></a>分享功能</h2><h3 id="百度分享"><a href="#百度分享" class="headerlink" title="百度分享"></a>百度分享</h3><p>hexo 已经集成了 baidushare，只需要在主题配置文件中打开配置即可<br>在配置百度分享功能时需指定其 type，type 可以为 button 活着 slide</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">baidushare:</span><br><span class="line">  type: slide</span><br><span class="line">  baidushare: true</span><br></pre></td></tr></table></figure>
+
+<p>有一点需要特别注意，baidushare 不支持 https。所以我们需要手动解决这个问题。解决方法就是把这个文件放在我们自己的目录下。</p>
+<h3 id="解决-https-分享"><a href="#解决-https-分享" class="headerlink" title="解决 https 分享"></a>解决 https 分享</h3><p>访问链接：<a href="https://github.com/hrwhisper/baiduShare" target="_blank" rel="noopener">static 文件夹</a></p>
+<p>将压缩包下载到本地，解压后，将 static 文件夹保存至博客项目 themes/next/source 目录下。</p>
+<h3 id="修改百度分享模板"><a href="#修改百度分享模板" class="headerlink" title="修改百度分享模板"></a>修改百度分享模板</h3><p>打开 themes/next/layout_partials/share/baidushare.swig，修改 <strong>末尾</strong> 代码</p>
+<p>将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.src&#x3D;&#39;http:&#x2F;&#x2F;bdimg.share.baidu.com&#x2F;static&#x2F;api&#x2F;js&#x2F;share.js?v&#x3D;89860593.js?cdnversion&#x3D;&#39;+~(-new Date()&#x2F;36e5)];</span><br></pre></td></tr></table></figure>
+
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.src&#x3D;&#39;&#x2F;static&#x2F;api&#x2F;js&#x2F;share.js?v&#x3D;89860593.js?cdnversion&#x3D;&#39;+~(-new Date()&#x2F;36e5)];</span><br></pre></td></tr></table></figure>
+
+<p>最后重新生成下，就能展示分享功能了。</p>
+<p>参考链接：<br><a href="https://github.com/hrwhisper/baiduShare" target="_blank" rel="noopener">百度分享不支持 Https 的解决方案</a><br><a href="https://blog.csdn.net/cl534854121/article/details/76121105?locationNum=6&fps=1" target="_blank" rel="noopener">Hexo+Github 搭建个人博客(三)——百度分享集成</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag"># 插件</a>
+          
+            <a href="/tags/%E5%8A%9F%E8%83%BD/" rel="tag"># 功能</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/954c5566/" rel="next" title="Gulp加速Hexo">
+                <i class="fa fa-chevron-left"></i> Gulp加速Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/56c67d5c/" rel="prev" title="JS实现焦点轮播图">
+                JS实现焦点轮播图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongpo Xu</p>
+              <p class="site-description motion-element" itemprop="description">许东坡的个人博客，未来的日子一起努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zpm683.xyz" title="午後のお茶で一杯" target="_blank">午後のお茶で一杯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cduyzh.com" title="Water Sister's Blog" target="_blank">Water Sister's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://itscloudy.gitee.io/blog/" title="ItsCloudy" target="_blank">ItsCloudy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cherryblog.site/" title="CherryBlog" target="_blank">CherryBlog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://asdfv1929.github.io/" title="1929's Home" target="_blank">1929's Home</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论功能"><span class="nav-number">2.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：注册账号"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：注册账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：安装"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：配置"><span class="nav-number">2.3.</span> <span class="nav-text">第三步：配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打赏功能"><span class="nav-number">3.</span> <span class="nav-text">打赏功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本"><span class="nav-number">3.1.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展版本"><span class="nav-number">3.2.</span> <span class="nav-text">扩展版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#玩偶功能"><span class="nav-number">4.</span> <span class="nav-text">玩偶功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：获取插件"><span class="nav-number">4.1.</span> <span class="nav-text">第一步：获取插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤二：选择自己喜欢的萌妹子"><span class="nav-number">4.2.</span> <span class="nav-text">步骤二：选择自己喜欢的萌妹子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤三：安装"><span class="nav-number">4.3.</span> <span class="nav-text">步骤三：安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红心功能"><span class="nav-number">5.</span> <span class="nav-text">红心功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网易云音乐"><span class="nav-number">6.</span> <span class="nav-text">网易云音乐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成外链"><span class="nav-number">6.1.</span> <span class="nav-text">生成外链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#放置外链"><span class="nav-number">6.2.</span> <span class="nav-text">放置外链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分享功能"><span class="nav-number">7.</span> <span class="nav-text">分享功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#百度分享"><span class="nav-number">7.1.</span> <span class="nav-text">百度分享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决-https-分享"><span class="nav-number">7.2.</span> <span class="nav-text">解决 https 分享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改百度分享模板"><span class="nav-number">7.3.</span> <span class="nav-text">修改百度分享模板</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-spinner"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongpo Xu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

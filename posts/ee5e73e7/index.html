@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Practice," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="持续一周的出差在今天结束了，忙忙碌碌的工作，零零散散的时间，出差前我留了个小练习给实验室小朋友，自己当然也要完成一下，出差第二天我就写完了这个系统，一直没时间整理，今天上飞机前抽点时间写一写。 前几个月给实验室买了几本书，本来说用 LabVIEW 写个实验室书籍借阅系统来着，但是一是懒、二也是懒，一直拖着没做，正好赶着这个机会，用 Python 弄个出来。GUI 界面我就不弄了，时间太紧迫，也不立">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python书籍借阅系统">
+<meta property="og:url" content="https://www.xudongpo.cn/posts/ee5e73e7/index.html">
+<meta property="og:site_name" content="Xu-Blog">
+<meta property="og:description" content="持续一周的出差在今天结束了，忙忙碌碌的工作，零零散散的时间，出差前我留了个小练习给实验室小朋友，自己当然也要完成一下，出差第二天我就写完了这个系统，一直没时间整理，今天上飞机前抽点时间写一写。 前几个月给实验室买了几本书，本来说用 LabVIEW 写个实验室书籍借阅系统来着，但是一是懒、二也是懒，一直拖着没做，正好赶着这个机会，用 Python 弄个出来。GUI 界面我就不弄了，时间太紧迫，也不立">
+<meta property="article:published_time" content="2019-06-02T01:52:37.000Z">
+<meta property="article:modified_time" content="2019-06-05T03:40:44.000Z">
+<meta property="article:author" content="Dongpo Xu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Practice">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xudongpo.cn/posts/ee5e73e7/"/>
+
+
+
+
+
+  <title>Python书籍借阅系统 | Xu-Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">养一猫一狗，猫叫夜宵，狗叫宵夜</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sentence">
+          <a href="/sentence/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            句子
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photos">
+          <a href="/photos/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xudongpo.cn/posts/ee5e73e7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dongpo Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python书籍借阅系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T09:52:37+08:00">
+                2019-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>持续一周的出差在今天结束了，忙忙碌碌的工作，零零散散的时间，出差前我留了个小练习给实验室小朋友，自己当然也要完成一下，出差第二天我就写完了这个系统，一直没时间整理，今天上飞机前抽点时间写一写。</p>
+<p>前几个月给实验室买了几本书，本来说用 LabVIEW 写个实验室书籍借阅系统来着，但是一是懒、二也是懒，一直拖着没做，正好赶着这个机会，用 Python 弄个出来。GUI 界面我就不弄了，时间太紧迫，也不立 Flag 说之后完善什么的，等回去再用 LabVIEW 弄一个吧。</p>
+<a id="more"></a>
+
+<p>今天正式回来上班了，把之前没弄完的整理完吧。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>首先我要对自己的需求进行分析。</p>
+<ol>
+<li>书籍数据需要存储下来（文本格式即可）</li>
+<li>可以增加新书籍，删除旧书籍</li>
+<li>可以借阅书籍，归还书籍</li>
+<li>可以查阅书籍信息，列出所有书籍</li>
+<li>借阅时候记录下借阅人姓名，借阅时间，方便管理员查询</li>
+<li>设定用户账户和管理员账户，权限分开</li>
+<li>用户账号可以借阅&amp;归还&amp;查询，管理员账号可以额外对书籍信息进行修改</li>
+</ol>
+<p>需求我列出来了，归根结底无非最基础的 CURD(create,update,retrieve,delete)，所以我建立了三个 py 文件，一个是 main.py 用于放最上层的交互逻辑，然后是中间层 func.py 用户放功能函数，以及最底层的 file.py 用于封装文件操作。</p>
+<h2 id="main-py"><a href="#main-py" class="headerlink" title="main.py"></a>main.py</h2><p>在 main.py 中我们定义的函数有如下几个：</p>
+<ul>
+<li>main 函数 —— 系统主函数</li>
+<li>register 函数 —— 用户注册函数</li>
+<li>login 函数 —— 用户登录函数</li>
+<li>admin 函数 —— 管理员登录函数</li>
+<li>CURD 函数 —— 增删改查</li>
+</ul>
+<p>main.py 主要用于最顶层和用户交互的逻辑，如用户登录、用户注册、管理员登录等等，再将具体的功能封装再下一层中。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> func</span><br><span class="line"></span><br><span class="line"><span class="comment"># mock数据</span></span><br><span class="line"><span class="comment"># 书籍格式 [书名, 作者]</span></span><br><span class="line"><span class="comment"># 用户格式 [用户名, 密码]</span></span><br><span class="line"><span class="comment"># books = [['1', '1'], ['2', '2'], ['3', '3']]</span></span><br><span class="line"><span class="comment"># # users = [['user1', 'psw1'], ['user2', 'psw2']]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 增删改查</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CURD</span><span class="params">(user, username)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> (user == <span class="string">'admin'</span>):</span><br><span class="line">            print(<span class="string">'\n'</span> + <span class="string">'-------------------------------'</span>)</span><br><span class="line">            print(<span class="string">'******** 增加书籍 --- 1 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 删除书籍 --- 2 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 查询书籍 --- 3 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 查看所有 --- 4 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 修改信息 --- 5 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 查看用户 --- 6 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 添加用户 --- 7 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 删除用户 --- 8 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 返回菜单 --- 9 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 退出系统 --- 0 ********'</span>)</span><br><span class="line">            print(<span class="string">'-------------------------------'</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                iNum = int(input(<span class="string">'请您输入操作对应的数字并按下回车键：'</span>))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">'------- 请您输入对应的数字 -------'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> iNum == <span class="number">1</span>:</span><br><span class="line">                    func.create()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">2</span>:</span><br><span class="line">                    func.delete()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">3</span>:</span><br><span class="line">                    func.retrieve()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">4</span>:</span><br><span class="line">                    func.showAll()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">5</span>:</span><br><span class="line">                    func.update()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">6</span>:</span><br><span class="line">                    func.showAllUser()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">7</span>:</span><br><span class="line">                    register()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">8</span>:</span><br><span class="line">                    func.deleteUser()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">9</span>:</span><br><span class="line">                    main()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">0</span>:</span><br><span class="line">                    os._exit(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> (user == <span class="string">'user'</span>):</span><br><span class="line">            print(<span class="string">'\n'</span> + <span class="string">'-------------------------------'</span>)</span><br><span class="line">            print(<span class="string">'******** 归还书籍 --- 1 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 借阅书籍 --- 2 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 查询书籍 --- 3 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 查看所有 --- 4 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 返回菜单 --- 9 ********'</span>)</span><br><span class="line">            print(<span class="string">'******** 退出系统 --- 0 ********'</span>)</span><br><span class="line">            print(<span class="string">'-------------------------------'</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                iNum = int(input(<span class="string">'请您输入操作对应的数字并按下回车键：'</span>))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">'------- 请您输入对应的数字 -------'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> iNum == <span class="number">1</span>:</span><br><span class="line">                    func.giveBack()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">2</span>:</span><br><span class="line">                    func.borrowBook(username)</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">3</span>:</span><br><span class="line">                    func.retrieve()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">4</span>:</span><br><span class="line">                    func.showAll()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">5</span>:</span><br><span class="line">                    func.update()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">9</span>:</span><br><span class="line">                    main()</span><br><span class="line">                <span class="keyword">elif</span> iNum == <span class="number">0</span>:</span><br><span class="line">                    os._exit(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'CURD---error'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    users = func.findUsers()</span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 用户登录 -----------'</span>)</span><br><span class="line">    data = func.inputData(<span class="string">'user'</span>)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> users:</span><br><span class="line">        print(<span class="string">'----------- 登录成功 -----------'</span>)</span><br><span class="line">        flag = <span class="literal">True</span></span><br><span class="line">        CURD(<span class="string">'user'</span>, data[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'----------- 登录失败 -----------'</span>)</span><br><span class="line">        print(<span class="string">'---- 用户名不存在 或 密码错误 ----'</span>)</span><br><span class="line">        print(<span class="string">'----- 请重新登录 或 注册账户 -----'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">admin</span><span class="params">()</span>:</span></span><br><span class="line">    users = func.findAdmins()</span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'---------- 管理员登录 -----------'</span>)</span><br><span class="line">    data = func.inputData(<span class="string">'user'</span>)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> users:</span><br><span class="line">        print(<span class="string">'----------- 登录成功 -----------'</span>)</span><br><span class="line">        flag = <span class="literal">True</span></span><br><span class="line">        CURD(<span class="string">'admin'</span>, data[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'----------- 登录失败 -----------'</span>)</span><br><span class="line">        print(<span class="string">'---- 管理员不存在 或 密码错误 ----'</span>)</span><br><span class="line">        print(<span class="string">'----- 请重新登录 或 联系主管 -----'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 用户注册 -----------'</span>)</span><br><span class="line">    data = func.inputData(<span class="string">'user'</span>)</span><br><span class="line">    func.addUser(data)</span><br><span class="line">    print(<span class="string">'----------- 注册完毕 -----------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'-------------------------------'</span>)</span><br><span class="line">    print(<span class="string">'            欢迎使用            '</span>)</span><br><span class="line">    print(<span class="string">'        实验室书籍借阅系统        '</span>)</span><br><span class="line">    print(<span class="string">'-------------------------------'</span>)</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>):</span><br><span class="line">        print(<span class="string">'\n'</span> + <span class="string">'-------------------------------'</span>)</span><br><span class="line">        print(<span class="string">'********** 登录 --- 1 **********'</span>)</span><br><span class="line">        print(<span class="string">'********** 注册 --- 2 **********'</span>)</span><br><span class="line">        print(<span class="string">'********** 管理 --- 3 **********'</span>)</span><br><span class="line">        print(<span class="string">'********** 退出 --- 0 **********'</span>)</span><br><span class="line">        print(<span class="string">'-------------------------------'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            iNum = int(input(<span class="string">'请您输入操作对应的数字并按下回车键：'</span>))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">'------- 请您输入对应的数字 -------'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> iNum == <span class="number">1</span>:</span><br><span class="line">                login()</span><br><span class="line">            <span class="keyword">elif</span> iNum == <span class="number">2</span>:</span><br><span class="line">                register()</span><br><span class="line">            <span class="keyword">elif</span> iNum == <span class="number">3</span>:</span><br><span class="line">                admin()</span><br><span class="line">            <span class="keyword">elif</span> iNum == <span class="number">0</span>:</span><br><span class="line">                os._exit(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">'------- 请您输入对应的数字 -------'</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="func-py"><a href="#func-py" class="headerlink" title="func.py"></a>func.py</h2><p>在 func.py 中我们定义的函数有如下几个：</p>
+<ul>
+<li>inputData(‘user’) —— 输入信息提取</li>
+<li>create() —— 增加书籍</li>
+<li>delete() —— 删除书籍</li>
+<li>update() —— 更新书籍</li>
+<li>retrieve() —— 查询书籍</li>
+<li>giveBack() —— 归还书籍</li>
+<li>borrowBook(‘username’) —— 借阅书籍</li>
+<li>showAllUser() —— 显示所有用户</li>
+<li>deleteUser() —— 删除用户</li>
+<li>showAll() —— 显示所有书籍</li>
+<li>findUsers() —— 查询用户</li>
+<li>findAdmins() —— 查询管理员</li>
+<li>addUser([‘username’,’password’]) —— 添加用户</li>
+</ul>
+<p>func.py 中主要封装了 CURD 操作所对应的一系列函数，将每个函数功能封装起来，方便上层调用，数据的读写再由底层实现。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 功能函数</span></span><br><span class="line"><span class="keyword">import</span> file</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">books = <span class="string">'books.txt'</span>  <span class="comment"># 书籍仓库</span></span><br><span class="line">borrow = <span class="string">'borrow.txt'</span>  <span class="comment"># 借出书籍</span></span><br><span class="line">users = <span class="string">'users.txt'</span>  <span class="comment"># 用户信息</span></span><br><span class="line">admins = <span class="string">'admins.bin'</span>  <span class="comment"># 管理员</span></span><br><span class="line">title = [<span class="string">'书名:'</span>, <span class="string">'作者：'</span>, <span class="string">'借阅人：'</span>, <span class="string">'  时间：'</span>]</span><br><span class="line">userTitle = [<span class="string">'用户名：'</span>, <span class="string">'密码：'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入信息提取</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inputData</span><span class="params">(keywords)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> keywords == <span class="string">'book'</span>:</span><br><span class="line">        key = input(<span class="string">'请输入书名：   \t'</span>)</span><br><span class="line">        value = input(<span class="string">'请输入作者名：\t'</span>)</span><br><span class="line">    <span class="keyword">elif</span> keywords == <span class="string">'user'</span>:</span><br><span class="line">        key = input(<span class="string">'请输入用户名：\t'</span>)</span><br><span class="line">        value = input(<span class="string">'请输入密码：   \t'</span>)</span><br><span class="line">    <span class="keyword">return</span> [key, value]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 添加书籍 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'book'</span>)</span><br><span class="line">    file.writeData(books, data, <span class="string">'a'</span>)</span><br><span class="line">    print(<span class="string">'----------- 添加成功 -----------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 删除书籍 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'book'</span>)</span><br><span class="line">    new = []  <span class="comment"># 定义一个空列表，用来存储结果</span></span><br><span class="line">    new = file.splitData(books)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> new:</span><br><span class="line">        new.remove(data)</span><br><span class="line">        fobj = open(books, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">            file.writeData(books, item, <span class="string">'a'</span>)</span><br><span class="line">        fobj.close()  <span class="comment"># 特别注意文件操作完毕后要close</span></span><br><span class="line">        print(<span class="string">'----------- 删除成功 -----------'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'------ 书籍不存在，自动返回 ------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 修改书籍 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'book'</span>)</span><br><span class="line">    new = []</span><br><span class="line">    new = file.splitData(books)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> new:</span><br><span class="line">        new.remove(data)</span><br><span class="line">        bookname = input(<span class="string">'请输入修改后的书名：'</span>)</span><br><span class="line">        author = input(<span class="string">'请输入修改后的作者：'</span>)</span><br><span class="line">        data = [bookname, author]</span><br><span class="line">        new.append(data)</span><br><span class="line">        fobj = open(books, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">            file.writeData(books, item, <span class="string">'a'</span>)</span><br><span class="line">        fobj.close()  <span class="comment"># 特别注意文件操作完毕后要close</span></span><br><span class="line">        print(<span class="string">'----------- 修改成功 -----------'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'------ 书籍不存在，自动返回 ------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">retrieve</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 查找书籍 -----------'</span>)</span><br><span class="line">    bookname = input(<span class="string">'请输入书名：'</span>)</span><br><span class="line">    new = file.splitData(books)</span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> book <span class="keyword">in</span> new:</span><br><span class="line">        <span class="keyword">if</span> book[<span class="number">0</span>] == bookname:</span><br><span class="line">            print(<span class="string">'书名：'</span>, book[<span class="number">0</span>], <span class="string">' 作者：'</span>, book[<span class="number">1</span>])</span><br><span class="line">            flag = flag + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> flag == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'----- 没有找到该书，自动返回 -----'</span>)</span><br><span class="line">    print(<span class="string">'----------- 查找结束 -----------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 归还书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">giveBack</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 归还书籍 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'book'</span>)</span><br><span class="line">    new = []  <span class="comment"># 定义一个空列表，用来存储结果</span></span><br><span class="line">    new = file.splitData(borrow)</span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">        <span class="keyword">if</span> data == [item[<span class="number">0</span>], item[<span class="number">1</span>]]:</span><br><span class="line">            new.remove(item)</span><br><span class="line">            fborrow = open(borrow, <span class="string">'w'</span>)</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">                file.writeData(borrow, item, <span class="string">'a'</span>)</span><br><span class="line">            fborrow.close()</span><br><span class="line">            fbooks = open(books, <span class="string">'a'</span>)</span><br><span class="line">            file.writeData(books, [data[<span class="number">0</span>], data[<span class="number">1</span>]], <span class="string">'a'</span>)</span><br><span class="line">            fbooks.close()</span><br><span class="line">            flag = flag + <span class="number">1</span></span><br><span class="line">            print(<span class="string">'----------- 归还成功 -----------'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">if</span> flag == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'------ 书本未借出，归还失败 ------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 借阅书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">borrowBook</span><span class="params">(username)</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 借阅书籍 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'book'</span>)</span><br><span class="line">    new = []  <span class="comment"># 定义一个空列表，用来存储结果</span></span><br><span class="line">    new = file.splitData(books)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> new:</span><br><span class="line">        new.remove(data)</span><br><span class="line">        fbooks = open(books, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">            file.writeData(books, [item[<span class="number">0</span>], item[<span class="number">1</span>]], <span class="string">'a'</span>)</span><br><span class="line">        fbooks.close()</span><br><span class="line">        fborrow = open(borrow, <span class="string">'a'</span>)</span><br><span class="line">        data.append(username)</span><br><span class="line">        data.append(datetime.datetime.now().strftime(<span class="string">'%Y-%m-%d'</span>))</span><br><span class="line">        file.writeData(borrow, data, <span class="string">'a'</span>)</span><br><span class="line">        fborrow.close()</span><br><span class="line">        print(<span class="string">'----------- 借书成功 -----------'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'------ 书籍不存在，自动返回 ------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有用户</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showAllUser</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 所有用户 -----------'</span>)</span><br><span class="line">    new = file.splitData(users)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">        print(<span class="string">''</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            print(<span class="string">'&#123;&#125; &#123;&#125; \t'</span>.format(userTitle[i], item[i], chr(<span class="number">12288</span>)), end=<span class="string">''</span>)  <span class="comment"># format格式化字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除用户</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteUser</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 删除用户 -----------'</span>)</span><br><span class="line">    data = inputData(<span class="string">'user'</span>)</span><br><span class="line">    new = []  <span class="comment"># 定义一个空列表，用来存储结果</span></span><br><span class="line">    new = file.splitData(users)</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">in</span> new:</span><br><span class="line">        new.remove(data)</span><br><span class="line">        fobj = open(users, <span class="string">'w'</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">            file.writeData(users, item, <span class="string">'a'</span>)</span><br><span class="line">        fobj.close()  <span class="comment"># 特别注意文件操作完毕后要close</span></span><br><span class="line">        print(<span class="string">'----------- 删除成功 -----------'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'------ 用户不存在，自动返回 ------'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有书籍</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showAll</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'----------- 所有书籍 -----------'</span>)</span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'---******** 在库书籍 ********---'</span>, end=<span class="string">''</span>)</span><br><span class="line">    new = file.splitData(books)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">        print(<span class="string">''</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            print(<span class="string">'&#123;&#125; &#123;&#125; \t'</span>.format(title[i], item[i], chr(<span class="number">12288</span>)), end=<span class="string">''</span>)  <span class="comment"># format格式化字符串</span></span><br><span class="line">    print(<span class="string">''</span>)</span><br><span class="line">    print(<span class="string">'\n'</span> + <span class="string">'---******** 借出书籍 ********---'</span>, end=<span class="string">''</span>)</span><br><span class="line">    new = file.splitData(borrow)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> new:</span><br><span class="line">        print(<span class="string">''</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            print(<span class="string">'&#123;&#125; &#123;&#125;   \t'</span>.format(title[i], item[i], chr(<span class="number">12288</span>)), end=<span class="string">''</span>)  <span class="comment"># format格式化字符串</span></span><br><span class="line">    print(<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询用户</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findUsers</span><span class="params">()</span>:</span></span><br><span class="line">    new = []</span><br><span class="line">    new = file.splitData(users)</span><br><span class="line">    <span class="keyword">return</span> new</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询管理员</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findAdmins</span><span class="params">()</span>:</span></span><br><span class="line">    new = []</span><br><span class="line">    new = file.splitData(admins)</span><br><span class="line">    <span class="keyword">if</span> (len(new) == <span class="number">0</span>):</span><br><span class="line">        new = [[<span class="string">'Aelous'</span>, <span class="string">'Admin'</span>], ]</span><br><span class="line">    print(<span class="string">"管理员账号：Aelous 密码：Admin"</span>)</span><br><span class="line">    <span class="keyword">return</span> new</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加用户</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addUser</span><span class="params">(data)</span>:</span></span><br><span class="line">    file.writeData(users, data, <span class="string">'a'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="file-py"><a href="#file-py" class="headerlink" title="file.py"></a>file.py</h2><p>在 file.py 中我们定义的函数有如下几个：</p>
+<ul>
+<li>readData(‘books.txt’) —— 读取信息</li>
+<li>writeData(‘books.txt’, [‘测试书籍 1’, ‘作者 1’], ‘a’) —— 写入信息</li>
+<li>splitData(‘books.txt’) —— 处理读取的信息</li>
+</ul>
+<p>file.py 中，封装了最底层的文件读写函数，将数据读取出来交给上层的功能函数处理。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># 文件读写底层</span></span><br><span class="line">title = [<span class="string">''</span>, <span class="string">','</span>, <span class="string">','</span>, <span class="string">','</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readData</span><span class="params">(fName)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fobj = open(fName, <span class="string">'a'</span>)  <span class="comment"># 读取</span></span><br><span class="line">        fobj.close()</span><br><span class="line">        fobj = open(fName, <span class="string">'r'</span>)  <span class="comment"># 读取</span></span><br><span class="line">    <span class="keyword">except</span> IOError:</span><br><span class="line">        print(<span class="string">'--- 数据获取失败，请联系管理员。 --'</span>)</span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># else中处理正常情况</span></span><br><span class="line">        <span class="keyword">return</span> fobj</span><br><span class="line">        fobj.close()  <span class="comment"># 特别注意文件操作完毕后要close</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeData</span><span class="params">(fName, data, way)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fobj = open(fName, way)  <span class="comment"># 这里的a意思是追加，这样在加了之后就不会覆盖掉源文件中的内容，如果是w则会覆盖。</span></span><br><span class="line">    <span class="keyword">except</span> IOError:</span><br><span class="line">        print(<span class="string">'--- 数据获取失败，请联系管理员。 --'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> data:</span><br><span class="line">            fobj.write(title[i] + str(value))</span><br><span class="line">            i = i + <span class="number">1</span></span><br><span class="line">        fobj.write(<span class="string">'\n'</span>)</span><br><span class="line">        fobj.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理读取的信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">splitData</span><span class="params">(fName)</span>:</span></span><br><span class="line">    fobj = readData(fName)</span><br><span class="line">    sourceInLines = fobj.readlines()</span><br><span class="line">    new = []  <span class="comment"># 定义一个空列表，用来存储结果</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> sourceInLines:</span><br><span class="line">        temp1 = line.strip(<span class="string">'\n'</span>)  <span class="comment"># 去掉每行最后的换行符'\n'</span></span><br><span class="line">        temp2 = temp1.split(<span class="string">','</span>)  <span class="comment"># 以','为标志，将每行分割成列表</span></span><br><span class="line">        new.append(temp2)  <span class="comment"># 将上一步得到的列表添加到new中</span></span><br><span class="line">    <span class="keyword">return</span> new</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成可执行文件"><a href="#生成可执行文件" class="headerlink" title="生成可执行文件"></a>生成可执行文件</h2><p>最终通过 pyinstaller 来将代码包装起来成为可执行文件，最终命令行版本的书籍借阅系统成型。</p>
+<ul>
+<li>pip install pyinstaller —— 安装 pyinstaller</li>
+<li>pyinstaller -F main.py —— 生成可执行文件</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Practice/" rel="tag"># Practice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/6b13abeb/" rel="next" title="Hexo升级NexT">
+                <i class="fa fa-chevron-left"></i> Hexo升级NexT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/dd0ab196/" rel="prev" title="许三观卖血记读后感">
+                许三观卖血记读后感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dongpo Xu</p>
+              <p class="site-description motion-element" itemprop="description">许东坡的个人博客，未来的日子一起努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zpm683.xyz" title="午後のお茶で一杯" target="_blank">午後のお茶で一杯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cduyzh.com" title="Water Sister's Blog" target="_blank">Water Sister's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://itscloudy.gitee.io/blog/" title="ItsCloudy" target="_blank">ItsCloudy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cherryblog.site/" title="CherryBlog" target="_blank">CherryBlog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://asdfv1929.github.io/" title="1929's Home" target="_blank">1929's Home</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析"><span class="nav-number">1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-py"><span class="nav-number">2.</span> <span class="nav-text">main.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#func-py"><span class="nav-number">3.</span> <span class="nav-text">func.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#file-py"><span class="nav-number">4.</span> <span class="nav-text">file.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成可执行文件"><span class="nav-number">5.</span> <span class="nav-text">生成可执行文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-spinner"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongpo Xu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
