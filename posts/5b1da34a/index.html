@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/xu.jpg?v=5.1.4" color="#222">
 
 
 
@@ -73,6 +73,8 @@
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Xu-Blog" type="application/atom+xml" />
 
 
 
@@ -523,20 +525,20 @@
 </ul>
 </li>
 </ul>
-<p><img src="/posts/5b1da34a/%E5%88%9B%E5%BB%BAClass.png" alt="创建Class"></p>
+<p><img src="%E5%88%9B%E5%BB%BAClass.png" alt="创建Class"></p>
 <p>创建 Class 完成之后，新创建的 Counter 表会显示在左侧，这时再切换到 test 应用的 <strong>设置 -&gt; 应用 Key</strong> 界面：</p>
-<p><img src="/posts/5b1da34a/%E5%A4%8D%E5%88%B6AppKey.png" alt="复制AppKey"></p>
+<p><img src="%E5%A4%8D%E5%88%B6AppKey.png" alt="复制AppKey"></p>
 <h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>把你的 AppID 和 AppKey 复制出来。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">leancloud_visitors:</span><br><span class="line">  enable: true # 这里要设置成 true</span><br><span class="line">  app_id: joaeddf4hsqudUUwx4gIvGF6-gzGzoHsz</span><br><span class="line">  app_key: E9UJsJpw1omCHuS22PdSpKoh</span><br></pre></td></tr></table></figure>
 
 <p>这时再重新部署博客，就可以正常使用文章阅读量统计的功能了。</p>
 <p>需要特别说明的是：<strong>记录文章访问量的唯一标识符是文章的发布日期和文章的标题，因此要确保这两个数值组合的唯一性，如果你更改了这两个数值，会造成文章阅读数值的清零重计。</strong></p>
 <h3 id="添加-Fork-me-on-Github-图标～"><a href="#添加-Fork-me-on-Github-图标～" class="headerlink" title="添加 Fork me on Github 图标～"></a>添加 Fork me on Github 图标～</h3><p>偶然看到别人的博客角落有个彩带，写着 Fork me on Github，长这个样子。</p>
-<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/posts/5b1da34a/ForkMe%E5%BD%A9%E5%B8%A6.png" alt="ForkMe彩带"></p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="ForkMe%E5%BD%A9%E5%B8%A6.png" alt="ForkMe彩带"></p>
 <p>灰常羡慕，那我能怂嘛，当然要搞一个了～</p>
 <p>于是乎，我找到了这俩网站，<strong><a href="https://github.blog/2008-12-19-github-ribbons/" target="_blank" rel="noopener">彩带</a></strong> 以及 <strong><a href="http://tholman.com/github-corners/" target="_blank" rel="noopener">章鱼猫</a></strong>，需要大家自取哦～</p>
 <h4 id="配置样式"><a href="#配置样式" class="headerlink" title="配置样式"></a>配置样式</h4><p>然后找一个自己喜欢的样式，复制代码到 themes/next/layout/_layout.swig 文件中，放在<strong>&lt;div class=”headband”&gt;</strong>的下面，样式啥的需要自己调整位置哦，吼猴～然后就大功告成了。</p>
-<p><img src="/posts/5b1da34a/Fork%E5%AE%8C%E6%88%90%E5%9B%BE.png" alt="Fork完成图"></p>
+<p><img src="Fork%E5%AE%8C%E6%88%90%E5%9B%BE.png" alt="Fork完成图"></p>
 <h4 id="当当当，注意啦！！！"><a href="#当当当，注意啦！！！" class="headerlink" title="当当当，注意啦！！！"></a>当当当，注意啦！！！</h4><p>我发现一件尴尬的事情，这样设置完，在移动端，这个图标还是在，然后和下拉菜单冲突拉，好丑的。</p>
 <p>所以，我们需要设置，在移动端不显示。</p>
 <p>修改文件/themes/next/layout/_layout.swig 找到如下代码</p>
@@ -547,7 +549,7 @@
 
 <p>然后重启就好啦～</p>
 <h3 id="添加站内搜索功能～"><a href="#添加站内搜索功能～" class="headerlink" title="添加站内搜索功能～"></a>添加站内搜索功能～</h3><p>诶诶，咋添加来着？？？emmmm…</p>
-<p><img src="/posts/5b1da34a/%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2.png" alt="站内搜索"></p>
+<p><img src="%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2.png" alt="站内搜索"></p>
 <p>好像 npm 装个 插件就好了好像是～</p>
 <h4 id="当当当当～安装插件"><a href="#当当当当～安装插件" class="headerlink" title="当当当当～安装插件"></a>当当当当～安装插件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-search</span><br><span class="line">npm install hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
 
@@ -558,7 +560,7 @@
 <p>在 _config.yml 配置文件写入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 更改 permalink 值</span><br><span class="line">permalink: posts&#x2F;:abbrlink&#x2F;</span><br><span class="line"># abbrlink config</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  #support crc16(default) and crc32</span><br><span class="line">  rep: hex    #support dec(default) and hex</span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/5b1da34a/%E7%9F%AD%E5%9C%B0%E5%9D%80before.png" alt="短地址before"><br><img src="/posts/5b1da34a/%E7%9F%AD%E5%9C%B0%E5%9D%80after.png" alt="短地址after"></p>
+<p><img src="%E7%9F%AD%E5%9C%B0%E5%9D%80before.png" alt="短地址before"><br><img src="%E7%9F%AD%E5%9C%B0%E5%9D%80after.png" alt="短地址after"></p>
 <p><strong>注意啦～</strong>刚改完后，你的所有图片链接啥的都挂掉了，但是不要慌，先 hexo clean，然后重新部署一下就好啦</p>
 <h3 id="封面模式"><a href="#封面模式" class="headerlink" title="封面模式"></a>封面模式</h3><p>推荐插件 hexo-less 类似于预览效果。</p>
 <p>但是这个预览效果不影响章内䆟。只需在文章中写 &lt;!–less–&gt; 作为分割线，less 前的内容会作为摘要，但不作为文章内容的一部分。</p>
@@ -723,6 +725,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -1332,3 +1341,4 @@
   };
   var typed = new Typed('#description', options);
 </script>
+

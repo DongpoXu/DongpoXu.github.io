@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/xu.jpg?v=5.1.4" color="#222">
 
 
 
@@ -73,6 +73,8 @@
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Xu-Blog" type="application/atom+xml" />
 
 
 
@@ -488,7 +490,7 @@
 <li>获取对应的 cookie 以及 user-agent</li>
 <li>在代码中添加到 headers 里面</li>
 </ol>
-<p><img src="/posts/8f666c53/%E6%9F%A5%E8%AF%A2cookie.png" alt="查询cookie"></p>
+<p><img src="%E6%9F%A5%E8%AF%A2cookie.png" alt="查询cookie"></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def getHTMLText(url):</span><br><span class="line">  kv = &#123;</span><br><span class="line">    <span class="string">'cookie'</span>: <span class="string">'adsgadfafegadsgadsfaefasdfaewfadsfag'</span></span><br><span class="line">    <span class="string">'uaer-agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">    r = requests.get(url, headers=kv, timeout=<span class="number">30</span>)</span><br><span class="line">    r.raise_for_status()</span><br><span class="line">    r.encoding = r.apparent_encoding</span><br><span class="line">    <span class="keyword">return</span> r.text</span><br><span class="line">  except:</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"gg"</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="补充问题"><a href="#补充问题" class="headerlink" title="补充问题"></a>补充问题</h2><p><strong>2019-05-06 更新</strong>：还遇到了一种问题，就是在 url 为 http 时，即使添加了 cookie 和 user-agent 也无法获取信息。</p>
@@ -673,6 +675,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -1282,3 +1291,4 @@
   };
   var typed = new Typed('#description', options);
 </script>
+

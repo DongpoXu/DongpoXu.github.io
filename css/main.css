@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d1ffd5;
+  background: #da32c3;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2743,7 +2743,7 @@ header.header {
 .site-subtitle {
   margin-top: 30px;
   color: #121212;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 .logo-line-before,
@@ -2910,4 +2910,11 @@ a {
     border: 0;
     border-radius: 0;
   }
+}
+.feed-link a {
+  display: inline-block;
+  padding: 0 15px;
+  color: #fc6423;
+  border: 1px solid #fc6423;
+  border-radius: 4px;
 }

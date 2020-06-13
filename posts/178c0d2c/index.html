@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/xu.jpg?v=5.1.4" color="#222">
 
 
 
@@ -73,6 +73,8 @@
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Xu-Blog" type="application/atom+xml" />
 
 
 
@@ -479,7 +481,7 @@
 <p><strong>GitHub</strong> 是一个面向开源及私有软件项目的托管平台，它提供的 GitHubPages 是一个静态站点托管服务。</p>
 <h2 id="创建-Github-仓库"><a href="#创建-Github-仓库" class="headerlink" title="创建 Github 仓库"></a>创建 Github 仓库</h2><h3 id="创建-Github"><a href="#创建-Github" class="headerlink" title="创建 Github"></a>创建 Github</h3><p>假定已经有 Github 账户。</p>
 <h3 id="创建-io-仓库"><a href="#创建-io-仓库" class="headerlink" title="创建 io 仓库"></a>创建 io 仓库</h3><ul>
-<li>点击创建仓库<br><img src="/posts/178c0d2c/新建仓库.png" style="height:200px;" alt="新建仓库"></li>
+<li>点击创建仓库<br><img src="新建仓库.png" style="height:200px;" alt="新建仓库"></li>
 <li>项目必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选 Initialize this repository with a README</li>
 <li>在建好的项目右侧有个 settings 按钮，点击它，向下拉到 GitHub Pages，你会看到那边有个网址，访问它，你将会惊奇的发现该项目已经被部署到网络上，能够通过外网来访问它。如果没有，你可以直接在浏览器输入自己仓库名，在浏览器进行访问，能访问成功说明也 OK。</li>
 </ul>
@@ -490,7 +492,7 @@
 <li>Git</li>
 </ul>
 <p>分别输入 node -v 和 npm -v，会返回对应的版本。</p>
-<p><img src="/posts/178c0d2c/%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2.png" alt="版本查询"></p>
+<p><img src="%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2.png" alt="版本查询"></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>如果您的电脑中已经安装上述必备程序，那么只需要使用 npm 即可完成 Hexo 的安装。</p>
 <ul>
 <li>npm install hexo -g</li>
@@ -509,11 +511,11 @@
 <h2 id="发布博客到-Github"><a href="#发布博客到-Github" class="headerlink" title="发布博客到 Github"></a>发布博客到 Github</h2><ul>
 <li>配置 Deployment，在其文件夹中，找到_config.yml 文件，修改 repo 值（在末尾）</li>
 </ul>
-<p><img src="/posts/178c0d2c/配置repo.png" style="height:150px;" alt="配置repo"></p>
+<p><img src="配置repo.png" style="height:150px;" alt="配置repo"></p>
 <ul>
 <li>repo 值的获取位置，需要把 Clone 方式切换成 SSH 形式，然后复制地址就可以了</li>
 </ul>
-<p><img src="/posts/178c0d2c/切换SSH.png" style="height:250px;" alt="切换SSH"></p>
+<p><img src="切换SSH.png" style="height:250px;" alt="切换SSH"></p>
 <ul>
 <li><p>在生成以及部署文章之前，需要安装一个扩展：npm install hexo-deployer-git</p>
 </li>
@@ -574,7 +576,7 @@
 <td>指地方 dns 缓存域名记录的时间,缓存失效后会再次获取<br>600:建议采用 600<br>60:如果经常修改 IP 可用(修改可快速生效),长期使用略影响解析速度<br>3600:如果 IP 极少变动(一年几次),可选择 3600,解析速度快</td>
 </tr>
 </tbody></table>
-<p><img src="/posts/178c0d2c/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90.png" alt="域名解析"></p>
+<p><img src="%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90.png" alt="域名解析"></p>
 <h3 id="添加-github-仓库的域名解析记录"><a href="#添加-github-仓库的域名解析记录" class="headerlink" title="添加 github 仓库的域名解析记录"></a>添加 github 仓库的域名解析记录</h3><p>按以下命令在自己的 github 仓库中添加 CNAME 文件，其中填入购买的域名。或者在仓库的 settings 中设置 Custom Domain 设置好自己的域名，github 会自动添加 CNAME 文件。</p>
 <p>~ touch CNAME<br>~ echo ‘yucicheung.me’&gt; CNAME</p>
 <ul>
@@ -584,7 +586,7 @@
 <ul>
 <li>设置完成后图</li>
 </ul>
-<p><img src="/posts/178c0d2c/%E8%AE%BE%E7%BD%AE%E5%AE%8C%E6%88%90.png" alt="设置完成"></p>
+<p><img src="%E8%AE%BE%E7%BD%AE%E5%AE%8C%E6%88%90.png" alt="设置完成"></p>
 
       
       <div>
@@ -745,6 +747,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -1354,3 +1363,4 @@
   };
   var typed = new Typed('#description', options);
 </script>
+

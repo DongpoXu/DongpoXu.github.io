@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xu.jpg?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/xu.jpg?v=5.1.4" color="#222">
 
 
 
@@ -73,6 +73,8 @@
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Xu-Blog" type="application/atom+xml" />
 
 
 
@@ -472,21 +474,21 @@
 <p>在此我个人的选择一般都是，用 CSS 实现，当然切图然后实现也是聪明人的办法，但是我觉得学好一个技术最关键的不是学习，而是使用。学了不用都是假把式。学了 CSS 有机会让你炫技，不用是大傻。</p>
 <p>最常见的一类小图标就是三角形，今天我来总结一下用 CSS 实现三角形的原理。<a id="more"></a>网上相关资料较多，讲的也都很好，个人博客主要还是用于记录分享，毫无商业前景，不喜勿喷。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="CSS-盒模型"><a href="#CSS-盒模型" class="headerlink" title="CSS 盒模型"></a>CSS 盒模型</h3><p>盒子模型包括了：margin-border-padding-content</p>
-<p><img src="/posts/4842f834/CSS盒模型.png" style="height:150px; border:none;" alt="CSS盒模型"></p>
+<p><img src="CSS盒模型.png" style="height:150px; border:none;" alt="CSS盒模型"></p>
 <p>其中，在上下左右的边框交界处，都形成了斜线，利用这一特性，我们可以通过设置不同的上下左右边框的宽度和颜色，可以得到小三角、小梯形等；调整宽度大小可以调节三角形的形状。</p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1"></a>示例 1</h3><p>我们首先尝试上下左右颜色区分，并将 border 的宽度给大一点，看看效果。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> <span class="number">#bf3eff</span> <span class="number">#b3ee3a</span> <span class="number">#6495ed</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/4842f834/示例1.png" style="height:150px; border:none;" alt="示例1"></p>
+<p><img src="示例1.png" style="height:150px; border:none;" alt="示例1"></p>
 <h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2"></a>示例 2</h3><p>接下来我们把 content 宽度设置为 0</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> <span class="number">#bf3eff</span> <span class="number">#b3ee3a</span> <span class="number">#6495ed</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden; <span class="comment">/* 这里设置overflow, font-size, line-height */</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>; <span class="comment">/*是因为, 虽然宽高度为0, 但在IE6下会具有默认的 */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">0</span>; <span class="comment">/* 字体大小和行高, 导致盒子呈现被撑开的长矩形 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/4842f834/示例2.png" style="height:150px; border:none;" alt="示例2"></p>
+<p><img src="示例2.png" style="height:150px; border:none;" alt="示例2"></p>
 <p>这时我们可以看到，已经出现了四个颜色不同的三角形了。</p>
 <h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3"></a>示例 3</h3><p>接下来我们把其中三种颜色设置为和背景颜色一样，只保留一种颜色的对比，代码如下：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> transparent transparent transparent;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/4842f834/示例3.png" style="height:150px; border:none;" alt="示例3"></p>
+<p><img src="示例3.png" style="height:150px; border:none;" alt="示例3"></p>
 <h4 id="IE6-下"><a href="#IE6-下" class="headerlink" title="IE6 下"></a>IE6 下</h4><p>在 IE6 下，不支持透明，需要将余下三条边的 border-style 设置为 dashed 即可。</p>
 <p>代码如下：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid dashed dashed dashed;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> transparent transparent transparent;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -494,12 +496,12 @@
 <h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例 4"></a>示例 4</h3><p>同理，我们消去相邻的两个三角形，会得到一个以对角线为斜边的大三角形。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid dashed dashed dashed;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> <span class="number">#bf3eff</span> transparent transparent;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/4842f834/示例4.png" style="height:150px; border:none;" alt="示例4"></p>
+<p><img src="示例4.png" style="height:150px; border:none;" alt="示例4"></p>
 <h3 id="示例-5"><a href="#示例-5" class="headerlink" title="示例 5"></a>示例 5</h3><p>这样我们设置 border-width 为不同的值：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">20px</span> <span class="number">40px</span> <span class="number">30px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#cd1076</span> transparent transparent transparent;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果如下：</p>
-<p><img src="/posts/4842f834/示例5.png" style="height:150px; border:none;" alt="示例5"></p>
+<p><img src="示例5.png" style="height:150px; border:none;" alt="示例5"></p>
 <p>就是说我们只要设置不同的宽度值，可以得到任意形状的三角形，完美。</p>
 <p><strong>注意</strong>：用来绘制三角形的必须是 block 元素。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://caibaojian.com/css-border-triangle.html" target="_blank" rel="noopener">CSS 三角形的实现原理及运用</a><br><a href="https://blog.csdn.net/ganyingxie123456/article/details/77934790" target="_blank" rel="noopener">css3 实现三角形、扇形和特殊的形状等</a></p>
@@ -663,6 +665,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -1272,3 +1281,4 @@
   };
   var typed = new Typed('#description', options);
 </script>
+
