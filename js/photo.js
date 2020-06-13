@@ -1,4 +1,3 @@
-
 var imgDataPath = '/photos/photoslist.json'; //图片名称高宽信息json文件路径
 var imgPath = '/photos/images/';  //图片访问路径
 var imgMaxNum = 50; //图片显示数量
@@ -36,7 +35,7 @@ photo = {
             imageY = imageSize.split('.')[1];
             li += '<div class="card" style="width:' + imageWidth + 'px">' +
                     '<div class="ImageInCard" style="height:'+ imageWidth * imageY / imageX + 'px">' +
-                      '<a data-fancybox="gallery" href="' + imgPath + imgNameWithPattern + '" data-caption="' + imgName + '" title="' +  imgName + '">' +
+                      '<a data-fancybox="gallery" href="' + imgPath + imgNameWithPattern + '" data-caption="' + imgName + '" title="' +  imgName + '" class="fancybox" fancybox.image' + '">' +
                         '<img data-src="' + imgPath + imgNameWithPattern + ' " src="' + imgPath + imgNameWithPattern + ' " data-loaded="true">' +
                       '</a>' +
                     '</div>' +
