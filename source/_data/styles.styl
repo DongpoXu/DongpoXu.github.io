@@ -1,0 +1,450 @@
+// Custom styles.
+
+// (๑•ั็ω•็ั๑)  (&gt;^ω^&lt;)  =￣ω￣=   (๑• . •๑)
+
+// 重置样式
+
+// use
+code {
+  font-size: 14px;
+}
+
+.posts-expand .post-block h2, .posts-expand .post-block h3, .posts-expand .post-block h4, .posts-expand .post-block h5, .posts-expand .post-block h6 {
+  padding-top: 0;
+}
+
+.myBord{
+  display: block;
+  position: fixed;
+  float: left;
+  bottom: 20px;
+  left: 20px;
+  & > p{
+    margin: 0;
+  }
+}
+
+// use
+#description,.post-title,.post-title>a,.mBlock>p{
+  text-align: center;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  -ms-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  -o-text-fill-color: transparent;
+  -ms-text-fill-color: transparent;
+}
+
+#description{
+  background-image: linear-gradient(to right, #483D8B,#CD5555,#2F4F4F);
+}
+.post-title,.post-title>a,.mBlock>p{
+  background-image: linear-gradient(to right,#ff6e71,#ffaa73,#3cdc82,#64dcf0,#b4b4ff);
+}
+
+.mBlock{
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  & p{
+    margin-bottom: 5px;
+  }
+}
+
+// use
+// 常用样式
+p.sAuthor { // 句子页作者样式
+  text-align: right;
+  font-weight: 500;
+}
+
+.beian .gonganBeian, .beian .icpBeian{
+  display: inline-block;
+  margin: 0px auto;
+}
+
+.gonganBeian img{
+  vertical-align: middle;
+  display:inline-block;
+  margin-top: -3px;
+}
+
+// use
+.sHr { // 句子页分隔栏样式
+  margin: 20px 0;
+  height: 2px;
+  background-color: #999;
+  background-image: none;
+}
+
+// use
+hr{
+  background-image: repeating-linear-gradient(-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
+  border: 0;
+  height: 3px;
+  margin: 20px 0;
+}
+
+//use
+// 文章内链接文本样式
+.post-block p a {
+  border-bottom: 1px solid #CDC673;
+  color: #CDC673;
+
+  &:hover {
+    border-bottom: 1px solid #fc6423;
+    color: #fc6423;
+  }
+}
+
+// use
+// 首页文章阴影样式
+.post-block {
+  border-radius: 40px;
+  margin: 60px 0;
+  padding: 25px 40px;
+  -webkit-box-shadow: 0 0 14px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 14px rgba(202, 203, 204, .5);
+}
+
+// use
+.site-author{
+  margin-top: 30px;
+}
+
+// 主题内容块
+.content{
+  padding-top: 20px;
+}
+
+// 首页头部样式
+.header .header-inner {
+  padding: 60px 0 5px 0;
+}
+
+.headband {
+  display: none;
+}
+
+.use-motion .brand {
+  padding: 6px 40px;
+  border: 2px solid #A4D3EE;
+  border-radius: 10px;
+  height: 50px;
+  background-color: rgba(238, 238, 209, 0.8);
+  background-image: url('/images/photo.png');
+  background-position: 12px;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  font-size: 30px;
+}
+
+.header {
+  background: url('/images/bg.png') center center no-repeat;
+  background-size: 100% auto;
+}
+
+header.header{
+  background: hsl(20,40%,90%);
+  background-image:
+  linear-gradient(90deg, #d29f38 11px, transparent 0), 
+  linear-gradient(90deg, #EEE8AA 23px, transparent 0),
+  linear-gradient(90deg, #55a1b7 41px, transparent 0);
+  background-size: 41px 100%, 61px 100%, 83px 100%;
+}
+
+.site-meta {
+  float: none;
+}
+
+.site-meta {
+  margin-left: 0;
+  text-align: center;
+}
+
+.site-meta .site-title {
+  left: 30px;
+  color: #000;
+  font-size: 28px;
+  font-family: 'Comic Sans MS', sans-serif;
+  line-height: 50px;
+}
+
+.site-subtitle {
+  height: 32px;
+  line-height: 32px;
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: #121212;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.logo-line-before, .logo-line-after {
+  display: none;
+}
+
+// use
+.menu {
+  float: none;
+  margin: 20px 10px;
+}
+
+//use
+.highlight-container{
+  margin-bottom: 35px;
+}
+
+// use
+.menu .menu-item a {
+  border-radius: 4px;
+  color: rgb(15, 46, 65);
+  font-size: 14px;
+}
+
+.menu .menu-item a:hover {
+  color: rgba(53, 32, 162, .8);
+}
+
+// 首页尾部样式
+.footer {
+  background: none;
+  font-size: 16px;
+}
+
+.footer-inner {
+  color: #4c618f;
+  text-align: center;
+  font-family: 'Comic Sans MS', sans-serif;
+}
+
+.exturl{
+  color: #4c618f;
+}
+
+.exturl:hover{
+  color: #fc6423;
+}
+
+// 侧边栏信息样式修改
+.site-author-name {
+  margin: 30px 0 10px;
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Comic Sans MS', sans-serif;
+}
+
+.links-of-blogroll {
+  margin-bottom: 42px;
+  font-size: 14px;
+}
+
+.links-of-author {
+  margin-top: 30px;
+  margin-bottom: 58px;
+}
+
+.sidebar-inner {
+  color: #649ab6;
+}
+
+.sidebar {
+  box-shadow: inset 2px 2px 40px #bdb2b2;
+}
+
+.sidebar a {
+  border-bottom: none;
+  border-bottom-color: #649ab6;
+  color: #649ab6;
+}
+
+.sidebar a:hover {
+  color: #0c0b0b;
+}
+
+.site-state-item {
+  display: inline-block;
+  padding: 8px 28px;
+  border-left: 1px solid #649ab6;
+}
+
+.sidebar-nav .sidebar-nav-active {
+  border-bottom-color: #649ab6;
+  color: #649ab6;
+}
+
+.sidebar-nav li:hover {
+  color: #8EE5EE;
+}
+
+// 文章目录样式
+.post-toc .nav .active>a {
+  color: #4f7e96;
+}
+
+.post-toc ol a:hover {
+  color: #A4D3EE;
+}
+
+.sidebar-nav .sidebar-nav-active:hover {
+  color: #B0E2FF;
+}
+
+a {
+  border-bottom: none;
+}
+
+// 首页阅读全文样式
+.post-header {
+  margin-top: 20px;
+}
+
+.posts-expand .post-title {
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.post-button .btn {
+  border-radius: 5px;
+  background: #686868;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  color: #fff;
+  font-size: 15px;
+  line-height: 2;
+  transition: .2s ease-out;
+}
+
+.post-button a {
+  margin: 0 !important;
+  border: none;
+}
+
+.post-button a:hover {
+  background-color: #fdfdfd;
+  color: #7784ba;
+}
+
+.posts-expand .post-eof {
+  margin: 30px auto;
+  width: 25%;
+}
+
+.posts-expand .post-meta {
+  margin: 5px 0 40px;
+}
+
+// 友链样式
+.sidebar-inner a:hover {
+  color: #B23AEE;
+}
+
+.links-of-blogroll-title {
+  margin: 15px 0;
+}
+
+.links-of-blogroll-list {
+  line-height: 1.2;
+}
+
+// 标签页样式
+.post-header {
+  margin: 20px 0;
+}
+
+.tag-cloud-tags {
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+}
+
+@media screen and (max-width: 767px) {
+  .posts-collapse .post {
+    margin: 10px 0;
+    padding: 10px 25px;
+  }
+
+  .posts-collapse .post-header {
+    margin: 10px 0;
+  }
+
+  .posts-collapse .post:hover {
+    color: #fc6423;
+  }
+
+  .posts-collapse .post-title {
+    margin: 10px 0 10px 62px;
+  }
+
+  .posts-collapse .collection-title {
+    position: relative;
+    margin: 40px 0;
+  }
+
+  .content-wrap{
+    padding: 0;
+  }
+
+  .post-block {
+    border-radius: 0;
+    margin: 30px 0;
+    padding: 25px 15px;
+  }
+
+  // 首页头部样式
+  .header .header-inner {
+    padding: 40px 0 0 0;
+  }
+
+  .content{
+    padding-top: 0;
+  }
+
+  .site-subtitle {
+    margin-bottom: 20px;
+  }
+  
+  .posts-expand .post, .posts-expand .post-header, .posts-expand .post-title {
+    margin-top: 0;
+  }
+
+  // 导航栏背景色
+  .site-nav {
+    border-color: rgba(255,255,255,.9);
+    background: rgba(255,255,255,.9);
+  }
+
+  // 移动端导航栏
+  .menu {
+    border-top: 1px dotted #000;
+  }
+
+  // 移动端导航栏列表
+  .menu .menu-item {
+    margin: 0;
+    border-bottom: 1px dotted #000;
+  }
+
+  .menu .menu-item a {
+    border: 0;
+    border-radius: 0;
+  }
+  
+  // use
+  // 移动端 ul , ol , blockquote , 代码块
+  .post-body ul,ol{
+    padding-left: 20px;
+  }
+
+  article blockquote{
+    padding: 0 10px;
+  }
+
+  .highlight-container{
+    margin: 0 -5px;
+  }
+  .myBord{
+    display: none;
+  }
+}
