@@ -61,6 +61,17 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
+# npm install https://github.com/CodeFalling/hexo-asset-image --save
+post_asset_folder: true
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -169,3 +180,4 @@ neat_js:
   compress:
   exclude:
     - '**/*.min.js'
+
