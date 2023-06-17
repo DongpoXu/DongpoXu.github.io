@@ -125,10 +125,10 @@ theme: next
 deploy:
   - type: git
     repository:
-      # github: git@github.com:DongpoXu/DongpoXu.github.io.git
+      github: git@github.com:DongpoXu/DongpoXu.github.io.git    # 用作页面备份，文件备份在https://gitee.com/xudongpo/blog-storage.git
       # coding: git@e.coding.net:DongpoXu/dongpoxu.git
       # Blog: git@47.104.109.67:/home/git/hexo.git
-      Rpi: pi@192.168.0.205:/var/repo/web_blog
+      Rpi: pi@192.168.31.140:/var/repo/web_blog
     branch: master
   # - type: baidu_url_submitter
 
