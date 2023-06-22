@@ -29,6 +29,9 @@ comments: false
 
 #### [✪ 案例](https://www.xudongpo.cn/case/)
 
+ba hao yi xi，这里的东西还没挪过来。
+Sorry, the content here has not been fully moved yet.
+
 ---
 
 ### 博客链接
@@ -36,6 +39,8 @@ comments: false
 #### [☞ CSDN](https://blog.csdn.net/Aelous_dp)
 
 #### [☛ 简书](https://www.jianshu.com/u/0eb71f891847)
+
+简书和CSDN已经停更，1是没时间，2是侵权搬运太多。
 
 ---
 
@@ -50,3 +55,15 @@ comments: false
 - GitHub: [DongpoXu](https://github.com/DongpoXu)
 
 ---
+
+### 人生目标
+
+目标节点 | 达成率
+:--- | :---
+27岁前博士毕业 | 临近毕业关头
+29岁结婚 | 已有爱人
+30岁前有孩子 | 得先结婚^ω^
+30岁前学会游泳&滑雪 | 滑板已会
+35岁前玩一次跳伞 | 克服心理恐惧 <br> 正在强身健体
+37岁前开一家公司 | 已开始在行业内打工
+孩子出生前完成创作 | 平衡车 & 四旋翼 <br> 独轮车 & 四足机器人
