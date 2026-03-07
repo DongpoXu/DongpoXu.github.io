@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/js/src/typed.js"></script>
 <script>
   var options = {
-      strings: ['养一猫一狗，猫叫夜宵，狗叫宵夜', '山有扶苏，隰有荷华', '不见子都，乃见狂且', '你都没坚持，谈什么未来'],
+      strings: ['养两猫一狗，旺财，啵啵，小米~', '山有扶苏，隰有荷华', '不见子都，乃见狂且', '你都没坚持，谈什么未来'],
       typeSpeed: 200, //打印的速度。数值越大，速度越慢
       loop: true, //开启循环
       loopCount: Infinity, //设置循环次数

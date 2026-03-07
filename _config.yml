@@ -6,8 +6,8 @@
 
 # Site
 title: Xu-Blog
-subtitle: 养一猫一狗，猫叫啵啵，狗叫没想好~~
-description: 许东坡的个人博客，未来的日子一起努力
+subtitle: 养两猫一狗，旺财，啵啵，小米~
+description: 许东坡的个人博客，未来的日子请好好加油！
 keywords: 许东坡, 博客, 个人博客
 author: Dongpo Xu
 language: zh-CN
@@ -127,8 +127,8 @@ deploy:
     repository:
       github: git@github.com:DongpoXu/DongpoXu.github.io.git    # 用作页面备份，文件备份在https://gitee.com/xudongpo/blog-storage.git
       # coding: git@e.coding.net:DongpoXu/dongpoxu.git
-      # Blog: git@47.104.109.67:/home/git/hexo.git
-      Rpi: pi@192.168.31.140:/var/repo/web_blog
+      Blog: git@39.103.85.98:/home/git/hexo.git
+      # Rpi: pi@192.168.31.140:/var/repo/web_blog
     branch: master
   # - type: baidu_url_submitter
 
